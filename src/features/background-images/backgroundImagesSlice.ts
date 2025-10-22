@@ -15,7 +15,15 @@ import type {
 } from "./background-images.types";
 import { BACKGROUND_IMAGE_FETCH_REASONS } from "./background-images.types";
 
-const onInitLoadNumOfImages = import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES * 2;
+const numberOfImagesToGetInput = import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES;
+const numberOfImagesToGet = 
+    Number(numberOfImagesToGetInput) &&
+    0 < Number(numberOfImagesToGetInput) &&
+    Number(numberOfImagesToGetInput) <= 30 ?
+    numberOfImagesToGetInput :
+    10;
+
+const onInitLoadNumOfImages = numberOfImagesToGet * 2
 
 export const fetchRandomBackgroundImages = createAsyncThunk<
     { newImages: Array<UnsplashImageType>, fetchReason: BackGroundImageFetchReasonsType },
@@ -28,7 +36,7 @@ export const fetchRandomBackgroundImages = createAsyncThunk<
         try {
             const newImages = fetchReason === BACKGROUND_IMAGE_FETCH_REASONS.INIT ?
              await fetchRandomImages(onInitLoadNumOfImages):
-             await fetchRandomImages();
+             await fetchRandomImages(numberOfImagesToGet);
 
             return { newImages, fetchReason }
         } catch (error) {
@@ -82,7 +90,7 @@ const backgroundImagesSlice = createSlice({
                 case BACKGROUND_IMAGE_FETCH_REASONS.INIT:
                     state.images = action.payload.newImages;
                     // Set the initial index to the middle
-                    state.currentDisplayImageIndex = Math.floor((action.payload.newImages.length / 2 )) - 1;
+                    state.currentDisplayImageIndex = Math.max(0, Math.floor((action.payload.newImages.length / 2 )) - 1);
                     break;
                 case BACKGROUND_IMAGE_FETCH_REASONS.FORWARD:
                     state.images = state.images.concat(action.payload.newImages);
@@ -90,7 +98,7 @@ const backgroundImagesSlice = createSlice({
                     break;
                 case BACKGROUND_IMAGE_FETCH_REASONS.BACKWARD:
                     state.images = action.payload.newImages.concat(state.images);
-                    state.currentDisplayImageIndex = action.payload.newImages.length - 1;
+                    state.currentDisplayImageIndex = Math.max(0, action.payload.newImages.length - 1);
                     break;
             }
             state.isLoading = false;

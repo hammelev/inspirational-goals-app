@@ -17,10 +17,13 @@ export default function BackgroundImage() {
     const isLoading = useAppSelector(selectIsLoading);
 
     const handleNavigation = (direction: 'back' | 'forward') => {
-        if (direction === 'back') {
-            dispatch(navigateBackward());
-        } else if (direction === 'forward') {
-            dispatch(navigateForward());
+        switch (direction) {
+            case 'back':
+                dispatch(navigateBackward());
+                break;
+            case 'forward':
+                dispatch(navigateForward());
+                break
         }
     }
 
