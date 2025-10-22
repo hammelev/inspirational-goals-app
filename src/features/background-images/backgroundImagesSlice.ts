@@ -1,32 +1,36 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+    createSlice,
+    createAsyncThunk,
+    isPending,
+    isRejected
+} from "@reduxjs/toolkit";
+import type { Action, ThunkAction } from "@reduxjs/toolkit";
+
+import { fetchRandomImages } from "./unsplash.service";
 
 import type {
     UnsplashImageType,
+    BackGroundImageFetchReasonsType,
     BackgroundImagesSliceStateType
-} from "./background-images-types";
+} from "./background-images.types";
+import { BACKGROUND_IMAGE_FETCH_REASONS } from "./background-images.types";
+
+const onInitLoadNumOfImages = import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES * 2;
 
 export const fetchRandomBackgroundImages = createAsyncThunk<
-    UnsplashImageType,
-    void,
+    { newImages: Array<UnsplashImageType>, fetchReason: BackGroundImageFetchReasonsType },
+    { fetchReason: BackGroundImageFetchReasonsType},
     { rejectValue: string }
 >(
-    'backgroundImages/fetchRandomBackgroundImages',
-    async (_, { rejectWithValue }) => {
-        const url = import.meta.env.VITE_UNSPLASH_BASE_URL + import.meta.env.VITE_UNSPLASH_GET_RANDOM_IMAGES_ENDPOINT;
-
-        const headers = new Headers();
-        headers.set('authorization', `Client-ID ${import.meta.env.VITE_UNSPLASH_ACCESS_KEY}`);
-
+    'backgroundImages/fetch',
+    async ( {fetchReason }, { rejectWithValue }
+    ) => {
         try {
-            const response = await fetch(url, { headers });
+            const newImages = fetchReason === BACKGROUND_IMAGE_FETCH_REASONS.INIT ?
+             await fetchRandomImages(onInitLoadNumOfImages):
+             await fetchRandomImages();
 
-            if (!response.ok) {
-                return rejectWithValue('Failed to fetch background image.');
-            }
-
-            const data = await response.json() as UnsplashImageType;
-            return data;
-
+            return { newImages, fetchReason }
         } catch (error) {
             if (error instanceof Error) {
                 return rejectWithValue(error.message);
@@ -36,8 +40,29 @@ export const fetchRandomBackgroundImages = createAsyncThunk<
     }
 );
 
+export const navigateForward = (): ThunkAction<void, { backgroundImages: BackgroundImagesSliceStateType }, unknown, Action<string>> => (dispatch, getState) => {
+    const { currentDisplayImageIndex, images } = getState().backgroundImages;
+
+    if (currentDisplayImageIndex < images.length - 1) {
+        dispatch(setCurrentDisplayImageIndex(currentDisplayImageIndex + 1));
+    } else {
+        dispatch(fetchRandomBackgroundImages({fetchReason:BACKGROUND_IMAGE_FETCH_REASONS.FORWARD}));
+    }
+};
+
+export const navigateBackward = (): ThunkAction<void, { backgroundImages: BackgroundImagesSliceStateType }, unknown, Action<string>> => (dispatch, getState) => {
+    const { currentDisplayImageIndex } = getState().backgroundImages;
+
+    if (0 < currentDisplayImageIndex) {
+        dispatch(setCurrentDisplayImageIndex(currentDisplayImageIndex - 1));
+    } else {
+        dispatch(fetchRandomBackgroundImages({fetchReason:BACKGROUND_IMAGE_FETCH_REASONS.BACKWARD}));
+    }
+};
+
 const initialState: BackgroundImagesSliceStateType = {
-    image: null,
+    images: [],
+    currentDisplayImageIndex: 0,
     isLoading: false,
     hasError: false,
     errorMessage: null
@@ -47,28 +72,50 @@ const backgroundImagesSlice = createSlice({
     name: 'backgroundImages',
     initialState,
     reducers: {
-
+        setCurrentDisplayImageIndex(state, action: { payload: number }) {
+            state.currentDisplayImageIndex = action.payload;
+        },
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchRandomBackgroundImages.pending, (state) => {
+        builder.addCase(fetchRandomBackgroundImages.fulfilled, (state, action) => {
+            switch (action.payload.fetchReason) {
+                case BACKGROUND_IMAGE_FETCH_REASONS.INIT:
+                    state.images = action.payload.newImages;
+                    // Set the initial index to the middle
+                    state.currentDisplayImageIndex = Math.floor((action.payload.newImages.length / 2 )) - 1;
+                    break;
+                case BACKGROUND_IMAGE_FETCH_REASONS.FORWARD:
+                    state.images = state.images.concat(action.payload.newImages);
+                    state.currentDisplayImageIndex += 1;
+                    break;
+                case BACKGROUND_IMAGE_FETCH_REASONS.BACKWARD:
+                    state.images = action.payload.newImages.concat(state.images);
+                    state.currentDisplayImageIndex = action.payload.newImages.length - 1;
+                    break;
+            }
+            state.isLoading = false;
+        });
+        builder.addMatcher(isPending(fetchRandomBackgroundImages), (state) => {
             state.isLoading = true;
             state.hasError = false;
             state.errorMessage = null;
         });
-        builder.addCase(fetchRandomBackgroundImages.fulfilled, (state, action) => {
-            state.image = action.payload;
-            state.isLoading = false;
-        });
-        builder.addCase(fetchRandomBackgroundImages.rejected, (state, action) => {
-            state.isLoading = false;
-            state.hasError = true;
+        builder.addMatcher(isRejected(fetchRandomBackgroundImages), (state, action) => {
             state.errorMessage = action.payload ?? 'An unknown error occurred.';
+            state.hasError = true;
+            state.isLoading = false;
         });
+
+
     }
 });
 
-export const selectBackgroundImage = (state: { backgroundImages: BackgroundImagesSliceStateType }) => state.backgroundImages.image;
+export const selectCurrentBackgroundImage = (state: { backgroundImages: BackgroundImagesSliceStateType }) => state.backgroundImages.images[state.backgroundImages.currentDisplayImageIndex];
 
-export const { } = backgroundImagesSlice.actions;
+export const selectIsLoading = (state: { backgroundImages: BackgroundImagesSliceStateType }) => state.backgroundImages.isLoading;
+
+export const {
+    setCurrentDisplayImageIndex
+} = backgroundImagesSlice.actions;
 
 export default backgroundImagesSlice.reducer;
