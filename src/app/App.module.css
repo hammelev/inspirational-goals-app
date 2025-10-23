@@ -1,0 +1,6 @@
+.top-bar {
+  display: grid;
+  grid-template-columns: 10% 70% 10%;
+  gap: 2px;
+  justify-content: space-between;
+}

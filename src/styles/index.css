@@ -1,3 +1,20 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --text-colour-default: #353839;
+  --button-colour-primary: #84a98c;
+  --container-color-primary: rgba(245, 243, 244, 0.6);
+}
+
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color: ff0000;
+}
+
+body {
+
+  color: var(--text-colour-default);
+  
 }

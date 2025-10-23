@@ -1,0 +1,23 @@
+.quote {
+    grid-column: 2;
+    background-color: var(--container-color-primary);
+    border-radius: 25px;
+    padding: 1rem;
+}
+
+.quote-update-button {
+    grid-column: 3;
+    background-color: var(--button-colour-primary);
+    color: white;
+    cursor: pointer;
+    border-radius: 15px;
+    border: none;
+    height: 4rem;
+    width: 4rem;
+    font-size: 2.5rem;
+}
+
+.quote-update-button:hover {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+    color: black;
+}

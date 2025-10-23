@@ -1,14 +1,18 @@
 // Components
 import BackgroundImage from '../features/background-images/BackgroundImage';
+import InspirationalQuotes from '../features/inspirational-quotes/InspirationalQuotes';
 
-import './App.css'
+import styles from './App.module.css';
 
 function App() {
 
   return (
     <>
-      <h1>Inspiratinal Website</h1>
+      <div className={styles['top-bar']}>
+        <InspirationalQuotes />
+      </div>
       <BackgroundImage />
+      
     </>
   )
 }
