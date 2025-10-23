@@ -19,7 +19,7 @@ export type BackGroundImageFetchReasonsType = typeof BACKGROUND_IMAGE_FETCH_REAS
 
 
 export interface BackgroundImagesSliceStateType {
-    images: Array<UnsplashImageType>;
+    images: UnsplashImageType[];
     currentDisplayImageIndex: number;
     isLoading: boolean;
     hasError: boolean;

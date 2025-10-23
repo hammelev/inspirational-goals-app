@@ -6,7 +6,6 @@ import {
 } from "@reduxjs/toolkit";
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
 
-import { fetchRandomImages } from "./unsplash.service";
 
 import type {
     UnsplashImageType,
@@ -14,19 +13,21 @@ import type {
     BackgroundImagesSliceStateType
 } from "./background-images.types";
 import { BACKGROUND_IMAGE_FETCH_REASONS } from "./background-images.types";
+import { fetchRandomImages } from "./unsplash.service";
 
-const numberOfImagesToGetInput = import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES;
+const numberOfImagesToGetInput = Number(import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES);
+
 const numberOfImagesToGet = 
-    Number(numberOfImagesToGetInput) &&
-    0 < Number(numberOfImagesToGetInput) &&
-    Number(numberOfImagesToGetInput) <= 30 ?
+    numberOfImagesToGetInput &&
+    0 < numberOfImagesToGetInput &&
+    numberOfImagesToGetInput <= 30 ?
     numberOfImagesToGetInput :
     10;
 
 const onInitLoadNumOfImages = numberOfImagesToGet * 2
 
 export const fetchRandomBackgroundImages = createAsyncThunk<
-    { newImages: Array<UnsplashImageType>, fetchReason: BackGroundImageFetchReasonsType },
+    { newImages: UnsplashImageType[], fetchReason: BackGroundImageFetchReasonsType },
     { fetchReason: BackGroundImageFetchReasonsType},
     { rejectValue: string }
 >(
@@ -48,23 +49,23 @@ export const fetchRandomBackgroundImages = createAsyncThunk<
     }
 );
 
-export const navigateForward = (): ThunkAction<void, { backgroundImages: BackgroundImagesSliceStateType }, unknown, Action<string>> => (dispatch, getState) => {
+export const navigateForward = (): ThunkAction<void, { backgroundImages: BackgroundImagesSliceStateType }, unknown, Action> => (dispatch, getState) => {
     const { currentDisplayImageIndex, images } = getState().backgroundImages;
 
     if (currentDisplayImageIndex < images.length - 1) {
         dispatch(setCurrentDisplayImageIndex(currentDisplayImageIndex + 1));
     } else {
-        dispatch(fetchRandomBackgroundImages({fetchReason:BACKGROUND_IMAGE_FETCH_REASONS.FORWARD}));
+        void dispatch(fetchRandomBackgroundImages({fetchReason:BACKGROUND_IMAGE_FETCH_REASONS.FORWARD}));
     }
 };
 
-export const navigateBackward = (): ThunkAction<void, { backgroundImages: BackgroundImagesSliceStateType }, unknown, Action<string>> => (dispatch, getState) => {
+export const navigateBackward = (): ThunkAction<void, { backgroundImages: BackgroundImagesSliceStateType }, unknown, Action> => (dispatch, getState) => {
     const { currentDisplayImageIndex } = getState().backgroundImages;
 
     if (0 < currentDisplayImageIndex) {
         dispatch(setCurrentDisplayImageIndex(currentDisplayImageIndex - 1));
     } else {
-        dispatch(fetchRandomBackgroundImages({fetchReason:BACKGROUND_IMAGE_FETCH_REASONS.BACKWARD}));
+        void dispatch(fetchRandomBackgroundImages({fetchReason:BACKGROUND_IMAGE_FETCH_REASONS.BACKWARD}));
     }
 };
 
@@ -118,7 +119,7 @@ const backgroundImagesSlice = createSlice({
     }
 });
 
-export const selectCurrentBackgroundImage = (state: { backgroundImages: BackgroundImagesSliceStateType }) => state.backgroundImages.images[state.backgroundImages.currentDisplayImageIndex];
+export const selectCurrentBackgroundImage = (state: { backgroundImages: BackgroundImagesSliceStateType }): UnsplashImageType | undefined => state.backgroundImages.images[state.backgroundImages.currentDisplayImageIndex];
 
 export const selectIsLoading = (state: { backgroundImages: BackgroundImagesSliceStateType }) => state.backgroundImages.isLoading;
 
