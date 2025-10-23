@@ -40,6 +40,12 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       ...reactRefresh.configs.vite.rules,
+      // TODO: Remove import sorting rules when Prettier is added
+      // For now, keeping minimal sorting config
+      'import/order': ['error', {
+        'alphabetize': { 'order': 'asc' },
+        'newlines-between': 'always'
+      }]
     }
   }
 ];

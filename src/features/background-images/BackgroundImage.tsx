@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
+
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
+
+import styles from './background-images.module.css';
+import { BACKGROUND_IMAGE_FETCH_REASONS } from './background-images.types';
 import {
     fetchRandomBackgroundImages,
     selectCurrentBackgroundImage,
@@ -7,9 +11,7 @@ import {
     navigateForward,
     navigateBackward
 } from './backgroundImagesSlice';
-import { BACKGROUND_IMAGE_FETCH_REASONS } from './background-images.types';
 
-import styles from './background-images.module.css';
 
 export default function BackgroundImage() {
     const dispatch = useAppDispatch();

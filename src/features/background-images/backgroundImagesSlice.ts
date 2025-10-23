@@ -6,7 +6,6 @@ import {
 } from "@reduxjs/toolkit";
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
 
-import { fetchRandomImages } from "./unsplash.service";
 
 import type {
     UnsplashImageType,
@@ -14,6 +13,7 @@ import type {
     BackgroundImagesSliceStateType
 } from "./background-images.types";
 import { BACKGROUND_IMAGE_FETCH_REASONS } from "./background-images.types";
+import { fetchRandomImages } from "./unsplash.service";
 
 const numberOfImagesToGetInput = String(import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES);
 
