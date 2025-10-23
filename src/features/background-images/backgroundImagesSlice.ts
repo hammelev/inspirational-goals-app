@@ -15,13 +15,13 @@ import type {
 import { BACKGROUND_IMAGE_FETCH_REASONS } from "./background-images.types";
 import { fetchRandomImages } from "./unsplash.service";
 
-const numberOfImagesToGetInput = String(import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES);
+const numberOfImagesToGetInput = Number(import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES);
 
 const numberOfImagesToGet = 
-    Number(numberOfImagesToGetInput) &&
-    0 < Number(numberOfImagesToGetInput) &&
-    Number(numberOfImagesToGetInput) <= 30 ?
-    Number(numberOfImagesToGetInput) :
+    numberOfImagesToGetInput &&
+    0 < numberOfImagesToGetInput &&
+    numberOfImagesToGetInput <= 30 ?
+    numberOfImagesToGetInput :
     10;
 
 const onInitLoadNumOfImages = numberOfImagesToGet * 2

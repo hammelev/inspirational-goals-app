@@ -7,7 +7,7 @@ const API_KEY = String(import.meta.env.VITE_UNSPLASH_ACCESS_KEY);
 const MAX_ALLOWED_IMAGES_TO_FETCH = 30;
 
 export const fetchRandomImages = async (numOfImagesToGet: number): Promise<UnsplashImageType[]> => {
-    const url = new URL(BASE_URL + GET_RANDOM_IMAGES_ENDPOINT );
+    const url = new URL(GET_RANDOM_IMAGES_ENDPOINT, BASE_URL);
     url.searchParams.append('count', Math.min(MAX_ALLOWED_IMAGES_TO_FETCH, numOfImagesToGet).toString());
 
     const headers = new Headers();
