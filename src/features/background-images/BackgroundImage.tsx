@@ -29,27 +29,29 @@ export default function BackgroundImage() {
 
     useEffect(() => {
         if (!image) {
-            dispatch(fetchRandomBackgroundImages({ fetchReason: BACKGROUND_IMAGE_FETCH_REASONS.INIT }));
+            void dispatch(fetchRandomBackgroundImages({ fetchReason: BACKGROUND_IMAGE_FETCH_REASONS.INIT }));
         }
     }, [dispatch, image]);
 
     return (
         <>
-            <img
-                className={styles['background-image']}
-                src={image?.urls.regular}
-                alt={image?.alt_description}
-            />
+            {image && (
+                <img
+                    className={styles['background-image']}
+                    src={image.urls.regular}
+                    alt={image.alt_description}
+                />
+            )}
             <button
                 className={`material-symbols-outlined ${styles['background-navigation-button']} ${styles['background-navigation-button-back']}`}
-                onClick={() => handleNavigation('back')}
+                onClick={() => {handleNavigation('back')}}
                 disabled={isLoading}
             >
                 arrow_back_ios
             </button>
-            <button 
+            <button
                 className={`material-symbols-outlined ${styles['background-navigation-button']} ${styles['background-navigation-button-forward']}`}
-                onClick={() => handleNavigation('forward')}
+                onClick={() => {handleNavigation('forward')}}
                 disabled={isLoading}
             >
                 arrow_forward_ios
