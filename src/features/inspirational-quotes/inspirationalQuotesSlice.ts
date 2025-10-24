@@ -7,7 +7,6 @@ import type {
 } from './inspirational-quotes.types';
 import { fetchRandomInspirationalQuotes } from './quoteable.service';
 
-
 export const fetchInspirationalQuotes = createAsyncThunk<
     QuoteableQuoteType[],
     undefined,
@@ -16,7 +15,8 @@ export const fetchInspirationalQuotes = createAsyncThunk<
     'inspirationalQuotes/fetch',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await fetchRandomInspirationalQuotes(5);
+            const response = await fetchRandomInspirationalQuotes(parseInt(String(import.meta.env.VITE_QUOTEABLE_NUMBER_OF_RANDOM_QUOTES), 10) || undefined
+);
 
             return response;
         } catch (error) {
