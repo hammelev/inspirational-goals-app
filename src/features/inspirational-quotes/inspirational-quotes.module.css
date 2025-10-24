@@ -1,0 +1,48 @@
+.quote {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 80vw;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--container-color-primary);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    gap: 0.25rem;
+    margin: auto;
+    font-size: 0.75rem;
+}
+
+.quote-author-and-button-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+}
+
+.quote-update-button {
+    grid-column: 3;
+    grid-row: 1;
+    background-color: var(--button-colour-primary);
+    color: white;
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 0.15rem 0.3rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    width: fit-content;
+    justify-self: end;
+    font-size: inherit;
+}
+
+.quote-update-button:hover {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+    color: black;
+}
+
+.quote-author {
+    grid-column: 2;
+    grid-row: 1;
+    font-weight: bold;
+    justify-self: center;
+}

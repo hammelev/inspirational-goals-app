@@ -1,13 +1,12 @@
 // Components
 import BackgroundImage from '../features/background-images/BackgroundImage';
-
-import './App.css'
+import InspirationalQuotes from '../features/inspirational-quotes/InspirationalQuotes';
 
 function App() {
 
   return (
     <>
-      <h1>Inspiratinal Website</h1>
+      <InspirationalQuotes />
       <BackgroundImage />
     </>
   )

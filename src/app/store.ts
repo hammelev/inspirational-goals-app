@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 
 // Slices
 import backgroundImagesReducer from "../features/background-images/backgroundImagesSlice";
+import inspirationalQuotesReducer from "../features/inspirational-quotes/inspirationalQuotesSlice";
 
 const store = configureStore({
     reducer: {
-        backgroundImages: backgroundImagesReducer
+        backgroundImages: backgroundImagesReducer,
+        inspirationalQuotes: inspirationalQuotesReducer
     }
 })
 
