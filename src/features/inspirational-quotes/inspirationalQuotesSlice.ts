@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice, isPending, isRejected } from '@reduxjs/toolkit';
 import type { Action, ThunkAction } from '@reduxjs/toolkit';
-import { fetchRandomInspirationalQuotes } from './quoteable.service';
 
 import type {
     InspirationalQuotesSliceStateType,
     QuoteableQuoteType
 } from './inspirational-quotes.types';
+import { fetchRandomInspirationalQuotes } from './quoteable.service';
+
 
 export const fetchInspirationalQuotes = createAsyncThunk<
     QuoteableQuoteType[],

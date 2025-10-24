@@ -3,7 +3,7 @@
 
   --text-colour-default: #353839;
   --button-colour-primary: #84a98c;
-  --container-color-primary: rgba(245, 243, 244, 0.6);
+  --container-color-primary: rgba(245, 243, 244, 0.5);
 }
 
 #root {

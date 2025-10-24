@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
+
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
+
+import styles from './inspirational-quotes.module.css';
 import {
     getNewQuote,
     selectCurrentQuote
 } from './inspirationalQuotesSlice';
 
-import styles from './inspirational-quotes.module.css';
 
 export default function InspirationalQuotes() {
     const dispatch = useAppDispatch();
@@ -20,19 +22,21 @@ export default function InspirationalQuotes() {
     }
 
     return (
-        <>
-            <div className={styles.quote}>
-                <span>{quote?.content}</span>
-                <span>- {quote?.author}</span>
+        <div className={styles.quote}>
+            <span>{quote?.content}</span>
+            <div className={styles['quote-author-and-button-container']}>
+                <span className={styles['quote-author']}>- {quote?.author}</span>
+                <button
+                    onClick={handleGetNewQuote}
+                    className={`material-symbols-outlined ${styles['quote-update-button']}`
+                    }>
+                    autorenew
+                </button>
+
             </div>
 
-            <button
-                onClick={handleGetNewQuote}
-                className={`material-symbols-outlined ${styles['quote-update-button']}`
-                }>
-                autorenew
-            </button>
-        </>
+        </div>
+
     )
 
 }
