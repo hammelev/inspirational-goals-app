@@ -7,24 +7,28 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import { fileURLToPath } from "url";
 
 export default defineConfig([
   {
-    ignores: [
-      "node_modules/",
-      "dist/",
-      "config/",
-      "eslint.config.js",
-      "prettier.config.js",
-      "stylelint.config.mjs",
-    ],
+    ignores: ["node_modules/", "dist/"],
   },
+
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   eslintImport.flatConfigs.typescript,
-  eslintConfigPrettier,
   {
+    files: ["vite.config.ts"], // Add any other root config files here
+    languageOptions: {
+      globals: globals.node,
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+        project: ["./tsconfig.node.json"],
+      },
+    },
+  },
+
+  {
+    files: ["src/**/*.{ts,js,tsx,jsx}"],
     plugins: {
       react,
       "react-hooks": reactHooks,
@@ -38,11 +42,11 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
       parserOptions: {
-        tsconfigRootDir: fileURLToPath(new URL("..", import.meta.url)),
+        tsconfigRootDir: import.meta.dirname,
         project: [
-          "./tsconfig.json",
-          "./config/tsconfig.app.json",
-          "./config/tsconfig.node.json",
+          "../tsconfig.json",
+          "./tsconfig.app.json",
+          "./tsconfig.node.json",
         ],
       },
     },
@@ -52,4 +56,10 @@ export default defineConfig([
       ...reactRefresh.configs.vite.rules,
     },
   },
+  {
+    // disable type-aware linting on JS files
+    files: ["**/*.js", "**/*.mjs"],
+    extends: [tseslint.configs.disableTypeChecked],
+  },
+  eslintConfigPrettier,
 ]);

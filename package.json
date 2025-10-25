@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b ./config/tsconfig.json && vite build",
+    "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx --config ./config/eslint.config.js",
     "lint:css": "stylelint \"**/*.{css,scss}\" --config ./config/stylelint.config.mjs",
