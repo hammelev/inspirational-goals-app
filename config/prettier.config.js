@@ -6,7 +6,6 @@ const config = {
     "<THIRD_PARTY_MODULES>",
     "^src/app/(.*)$",
     "^src/features/(.*)$",
-    "^@/(.*)$",
     "^[./]",
   ],
   importOrderSeparation: true,
