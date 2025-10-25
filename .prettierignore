@@ -20,4 +20,3 @@ pnpm-lock.yaml
 
 # Lock files (these have their own formatting)
 *.lock
-pnpm-lock.yaml
