@@ -1,4 +1,5 @@
 import eslint from "@eslint/js";
+
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import eslintImport from "eslint-plugin-import";
 import react from "eslint-plugin-react";
