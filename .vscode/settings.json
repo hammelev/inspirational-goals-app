@@ -32,5 +32,6 @@
   ],
   "scss.validate": false,
   "stylelint.enable": true,
-  "stylelint.validate": ["css", "scss"]
+  "stylelint.validate": ["css", "scss"],
+  "files.eol": "\n"
 }

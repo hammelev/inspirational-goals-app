@@ -1,22 +1,34 @@
-import eslint from "@eslint/js";
-
+import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import eslintImport from "eslint-plugin-import";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-export default [
+export default defineConfig([
   {
-    ignores: ["dist/", "eslint.config.js", "stylelint.config.mjs"],
+    ignores: ["node_modules/", "dist/"],
   },
-  eslint.configs.recommended,
+
+  js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   eslintImport.flatConfigs.typescript,
-  eslintConfigPrettier,
   {
+    files: ["vite.config.ts"], // Add any other root config files here
+    languageOptions: {
+      globals: globals.node,
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+        project: ["./tsconfig.node.json"],
+      },
+    },
+  },
+
+  {
+    files: ["src/**/*.{ts,js,tsx,jsx}"],
     plugins: {
       react,
       "react-hooks": reactHooks,
@@ -32,7 +44,7 @@ export default [
       parserOptions: {
         tsconfigRootDir: import.meta.dirname,
         project: [
-          "./tsconfig.json",
+          "../tsconfig.json",
           "./tsconfig.app.json",
           "./tsconfig.node.json",
         ],
@@ -44,4 +56,10 @@ export default [
       ...reactRefresh.configs.vite.rules,
     },
   },
-];
+  {
+    // disable type-aware linting on JS files
+    files: ["**/*.js", "**/*.mjs"],
+    extends: [tseslint.configs.disableTypeChecked],
+  },
+  eslintConfigPrettier,
+]);

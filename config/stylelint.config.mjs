@@ -2,6 +2,7 @@
 import propertyGroups from "stylelint-config-recess-order/groups";
 
 export default {
+  ignoreFiles: ["../dist/**/*", "../node_modules/**/*"],
   extends: ["stylelint-config-standard"],
   plugins: ["stylelint-order"],
   rules: {
