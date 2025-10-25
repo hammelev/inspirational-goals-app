@@ -1,20 +1,17 @@
 /** @type {import("stylelint").Config} */
-import propertyGroups from 'stylelint-config-recess-order/groups';
+import propertyGroups from "stylelint-config-recess-order/groups";
 
 export default {
-  "extends": [
-    'stylelint-config-standard',
-  ],
-  plugins: [
-    'stylelint-order'
-  ],
-  "rules": {
-    'declaration-empty-line-before': null,
+  extends: ["stylelint-config-standard"],
+  plugins: ["stylelint-order", "stylelint-prettier"],
+  rules: {
+    "declaration-empty-line-before": null,
     // Configure the rule manually.
-    'order/properties-order': propertyGroups.map((group) => ({
+    "order/properties-order": propertyGroups.map((group) => ({
       ...group,
-      emptyLineBefore: 'always',
+      emptyLineBefore: "always",
       noEmptyLineBetween: true,
     })),
-  }
+    "prettier/prettier": true,
+  },
 };

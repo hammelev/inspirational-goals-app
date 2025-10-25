@@ -1,51 +1,54 @@
 .background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 
-    object-fit: cover;
+  object-fit: cover;
 
-    filter: brightness(0.7);
+  filter: brightness(0.7);
 }
 
 .background-navigation-button {
-    position: fixed;
-    top: 50%;
-    z-index: 10;
+  position: fixed;
+  top: 50%;
+  z-index: 10;
 
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 
-    font-size: 4rem;
+  font-size: 4rem;
 
-    color: rgb(255 255 255 / 60%);
+  color: rgb(255 255 255 / 60%);
 
-    cursor: pointer;
+  cursor: pointer;
 
-    background: transparent;
-    border: none;
+  background: transparent;
+  border: none;
 
-    transform: translateY(-50%);
+  transform: translateY(-50%);
 
-    transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease,
+    filter 0.3s ease;
 }
 
 .background-navigation-button:hover {
-    color: white;
+  color: white;
 
-    filter: drop-shadow(0 0 12px rgb(255 255 255 / 80%));
+  filter: drop-shadow(0 0 12px rgb(255 255 255 / 80%));
 
-    transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .background-navigation-button-back {
-    left: 1rem;
+  left: 1rem;
 }
 
 .background-navigation-button-forward {
-    right: 1rem;
+  right: 1rem;
 }

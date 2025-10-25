@@ -1,9 +1,8 @@
 // Components
-import BackgroundImage from '../features/background-images/BackgroundImage';
-import InspirationalQuotes from '../features/inspirational-quotes/InspirationalQuotes';
+import BackgroundImage from "../features/background-images/BackgroundImage";
+import InspirationalQuotes from "../features/inspirational-quotes/InspirationalQuotes";
 
 function App() {
-
   return (
     <>
       <InspirationalQuotes />
