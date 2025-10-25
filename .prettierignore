@@ -1,0 +1,22 @@
+# Dependencies and package manager files
+/node_modules
+pnpm-lock.yaml
+.pnpm-store/
+
+# Build and output directories
+/dist
+/build
+/coverage
+
+# Cache and temporary files
+.eslintcache
+.stylelintcache
+.DS_Store
+*.log
+
+# Generated files
+*.min.js
+*.min.css
+
+# Lock files (these have their own formatting)
+*.lock

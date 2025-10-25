@@ -4,21 +4,21 @@
 
 1. Install dependencies:
 
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 2. Set up environment variables:
-    See [Environment Setup](#environment-setup) for details.
+   See [Environment Setup](#environment-setup) for details.
 
 3. Configure your editor:
-    See [Development Setup](#development-setup) for VS Code configuration.
+   See [Development Setup](#development-setup) for VS Code configuration.
 
 4. Start the development server:
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```
 
 ## Environment Setup
 
@@ -33,9 +33,9 @@ We use `.env.local` for secrets (like API keys) to prevent accidentally committi
 
 1. Edit `.env.local` and add your secrets:
 
-    ```properties
-    VITE_UNSPLASH_ACCESS_KEY=your-actual-key-here
-    ```
+   ```properties
+   VITE_UNSPLASH_ACCESS_KEY=your-actual-key-here
+   ```
 
 2. Never commit `.env.local` - it's automatically git-ignored
 
