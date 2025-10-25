@@ -12,7 +12,7 @@
     See [Environment Setup](#environment-setup) for details.
 
 3. Configure your editor:
-    See [Editor Setup](#editor-setup) for VS Code configuration.
+    See [Development Setup](#development-setup) for VS Code configuration.
 
 4. Start the development server:
 
@@ -44,74 +44,46 @@ We use `.env.local` for secrets (like API keys) to prevent accidentally committi
 - `VITE_UNSPLASH_ACCESS_KEY` - Unsplash API access key
   - Get one at: <https://unsplash.com/developers>
 
-## Editor Setup
+## Development Setup
 
-### VS Code Configuration
+### Editor Configuration (VS Code)
 
-1. **Required Extensions:**
-   - [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+This project includes pre-configured VS Code settings and recommended extensions for consistent development experience across the team.
+
+1. **Install Required Extensions:**
+   VS Code will automatically prompt you to install the recommended extensions when you open the project. If not:
    - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+   - [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 
-2. **Workspace Settings:**
-   The project includes VS Code workspace settings (`.vscode/settings.json`) for consistent formatting and linting across the team. These settings:
-   - Enable automatic CSS formatting on save
-   - Configure StyleLint as the default CSS formatter
-   - Ensure consistent styling across the team
+2. **Editor Settings:**
+   The project includes `.vscode/settings.json` with all necessary configuration for:
+   - Auto-formatting on save for TypeScript/JavaScript (ESLint)
+   - CSS formatting and linting (StyleLint)
+   - Proper TypeScript settings
 
-   No additional configuration is needed as these settings are version-controlled.
+   No manual configuration needed - all settings are version-controlled.
 
-### CSS Styling Conventions
+### Code Style
 
-We use StyleLint with recess-order for consistent CSS property ordering. The configuration:
+- **TypeScript/JavaScript**: ESLint enforces consistent code style
+- **CSS:**
+  - StyleLint with recess-order for logical property grouping
+  - Properties ordered by: positioning → layout → box model → visual
+  - Automatic empty lines between property groups
+  - CSS custom properties (variables) are alphabetically ordered
 
-- Orders properties in logical groups (positioning → layout → box model → visual)
-- Adds empty lines between property groups for readability
-- CSS custom properties (variables) are manually alphabetically ordered
-
-To manually fix styling issues:
+### Code Quality Commands
 
 ```bash
+# Check all TypeScript/JavaScript files
+pnpm lint:js
+
+# Check all CSS files
+pnpm lint:css
+
+# Fix CSS formatting
 pnpm lint:css:fix
+
+# Run all linting checks
+pnpm lint
 ```
-
-## Linting and Formatting
-
-This project uses ESLint for TypeScript/JavaScript and Stylelint for CSS.
-
-### VS Code Setup
-
-To automatically format and fix linting errors on save in VS Code, you can use the recommended extensions and settings.
-
-#### 1. Install Extensions
-
-Install the following VS Code extensions:
-
-- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
-
-#### 2. Configure `settings.json`
-
-Open your VS Code `settings.json` file and add the following configuration:
-
-```json
-{
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit",
-        "source.fixAll.stylelint": "explicit"
-    },
-    "stylelint.validate": [
-        "css"
-    ],
-    "[css]": {
-        "editor.defaultFormatter": "stylelint.vscode-stylelint"
-    },
-    "css.validate": false,
-    "editor.codeActions.triggerOnFocusChange": true
-}
-```
-
-This configuration will:
-
-- Automatically fix ESLint and Stylelint errors on save.
-- Set Stylelint as the default formatter for CSS files.
-- Disable the default CSS validation in VS Code to prevent conflicts.
