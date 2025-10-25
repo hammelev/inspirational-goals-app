@@ -1,18 +1,26 @@
-import eslint from "@eslint/js";
-
+import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import eslintImport from "eslint-plugin-import";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+import { fileURLToPath } from "url";
 
-export default [
+export default defineConfig([
   {
-    ignores: ["dist/", "eslint.config.js", "stylelint.config.mjs"],
+    ignores: [
+      "node_modules/",
+      "dist/",
+      "config/",
+      "eslint.config.js",
+      "prettier.config.js",
+      "stylelint.config.mjs",
+    ],
   },
-  eslint.configs.recommended,
+  js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   eslintImport.flatConfigs.typescript,
   eslintConfigPrettier,
@@ -30,11 +38,11 @@ export default [
     languageOptions: {
       globals: globals.browser,
       parserOptions: {
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: fileURLToPath(new URL("..", import.meta.url)),
         project: [
           "./tsconfig.json",
-          "./tsconfig.app.json",
-          "./tsconfig.node.json",
+          "./config/tsconfig.app.json",
+          "./config/tsconfig.node.json",
         ],
       },
     },
@@ -44,4 +52,4 @@ export default [
       ...reactRefresh.configs.vite.rules,
     },
   },
-];
+]);

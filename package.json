@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b ./config/tsconfig.json && vite build",
     "preview": "vite preview",
-    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:css": "stylelint \"**/*.{css,scss}\"",
-    "lint:css:fix": "stylelint \"**/*.{css,scss}\" --fix",
+    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx --config ./config/eslint.config.js",
+    "lint:css": "stylelint \"**/*.{css,scss}\" --config ./config/stylelint.config.mjs",
+    "lint:css:fix": "stylelint \"**/*.{css,scss}\" --config ./config/stylelint.config.mjs --fix",
     "lint": "pnpm run lint:js && pnpm run lint:css",
-    "format": "prettier --write .",
-    "format-check": "prettier --check ."
+    "format": "prettier --write . --config ./config/prettier.config.js",
+    "format-check": "prettier --check . --config ./config/prettier.config.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.9.1",
