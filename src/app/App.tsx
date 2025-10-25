@@ -9,7 +9,7 @@ function App() {
       <InspirationalQuotes />
       <BackgroundImage />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

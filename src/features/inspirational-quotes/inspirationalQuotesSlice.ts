@@ -15,8 +15,8 @@ export const fetchInspirationalQuotes = createAsyncThunk<
     'inspirationalQuotes/fetch',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await fetchRandomInspirationalQuotes(parseInt(String(import.meta.env.VITE_QUOTEABLE_NUMBER_OF_RANDOM_QUOTES), 10) || undefined
-);
+            const count = parseInt(String(import.meta.env.VITE_QUOTEABLE_NUMBER_OF_RANDOM_QUOTES), 10) || undefined;
+            const response = await fetchRandomInspirationalQuotes(count);
 
             return response;
         } catch (error) {

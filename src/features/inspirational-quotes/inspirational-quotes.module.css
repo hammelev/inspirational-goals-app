@@ -1,48 +1,68 @@
 .quote {
     display: flex;
+
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 80vw;
-    padding: 0.5rem 0.75rem;
-    background-color: var(--container-color-primary);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
+
     gap: 0.25rem;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 80vw;
+
+    padding: 0.5rem 0.75rem;
     margin: auto;
+
     font-size: 0.75rem;
+
+    background-color: var(--container-color-primary);
+    border: 1px solid rgb(255 255 255 / 20%);
+    border-radius: 25px;
+
+    backdrop-filter: blur(8px);
 }
 
 .quote-author-and-button-container {
-    width: 100%;
     display: grid;
+
     grid-template-columns: auto auto auto;
+
     align-items: center;
+
+    width: 100%;
 }
 
 .quote-update-button {
-    grid-column: 3;
     grid-row: 1;
-    background-color: var(--button-colour-primary);
-    color: white;
-    cursor: pointer;
-    border-radius: 15px;
-    padding: 0.15rem 0.3rem;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    width: fit-content;
+    grid-column: 3;
+
     justify-self: end;
+
+    width: fit-content;
+
+    padding: 0.15rem 0.3rem;
+
     font-size: inherit;
+
+    color: white;
+
+    cursor: pointer;
+
+    background-color: var(--button-color-primary);
+    border: 1px solid rgb(0 0 0 / 20%);
+    border-radius: 15px;
 }
 
 .quote-update-button:hover {
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
     color: black;
+
+    filter: drop-shadow(0 0 12px rgb(255 255 255 / 80%));
 }
 
 .quote-author {
-    grid-column: 2;
     grid-row: 1;
-    font-weight: bold;
+    grid-column: 2;
+
     justify-self: center;
+
+    font-weight: bold;
 }

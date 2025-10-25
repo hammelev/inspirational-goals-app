@@ -18,4 +18,4 @@ export const fetchRandomInspirationalQuotes = async(numOfQuotesToGet = 1): Promi
     const data = await response.json() as QuoteableQuoteType[];
 
     return data;
-}
+};
