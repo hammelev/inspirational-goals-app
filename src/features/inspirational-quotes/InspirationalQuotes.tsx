@@ -19,7 +19,7 @@ export default function InspirationalQuotes() {
 
     const handleGetNewQuote = () => {
         dispatch(getNewQuote());
-    }
+    };
 
     return (
         <div className={styles.quote}>
@@ -37,6 +37,6 @@ export default function InspirationalQuotes() {
 
         </div>
 
-    )
+    );
 
 }

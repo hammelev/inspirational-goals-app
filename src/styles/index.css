@@ -1,19 +1,20 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* CSS Custom Properties - alphabetically ordered */
+  --button-color-primary: #84a98c;
+  --container-color-primary: rgb(245 243 244 / 50%);
+  --text-color-default: #353839;
 
-  --text-colour-default: #353839;
-  --button-colour-primary: #84a98c;
-  --container-color-primary: rgba(245, 243, 244, 0.5);
+  /* Other root styles */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 #root {
-  margin: 0 auto;
   padding: 2rem;
+  margin: 0 auto;
+
   text-align: center;
 }
 
 body {
-
-  color: var(--text-colour-default);
-  
+  color: var(--text-color-default);
 }

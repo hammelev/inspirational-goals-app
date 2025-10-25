@@ -1,0 +1,21 @@
+{
+    "css.validate": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "eslint.enable": true,
+    "eslint.format.enable": false,
+    "eslint.lintTask.enable": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "scss.validate": false,
+    "stylelint.validate": [
+        "css",
+        "scss"
+    ]
+}

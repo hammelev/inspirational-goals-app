@@ -17,10 +17,8 @@ import { fetchRandomImages } from "./unsplash.service";
 
 const numberOfImagesToGetInput = Number(import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES);
 
-const numberOfImagesToGet = 
-    numberOfImagesToGetInput &&
-    0 < numberOfImagesToGetInput &&
-    numberOfImagesToGetInput <= 30 ?
+const numberOfImagesToGet =
+    (0 < numberOfImagesToGetInput && numberOfImagesToGetInput <= 30) ?
     numberOfImagesToGetInput :
     10;
 

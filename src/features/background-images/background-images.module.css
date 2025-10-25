@@ -2,37 +2,43 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: -1;
+
     width: 100vw;
     height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-    filter: brightness(0.7);
-}
 
-.background-navigation-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
+    object-fit: cover;
+
+    filter: brightness(0.7);
 }
 
 .background-navigation-button {
     position: fixed;
     top: 50%;
-    transform: translateY(-50%);
+    z-index: 10;
+
+    padding: 0;
+    margin: 0;
+
+    font-size: 4rem;
+
+    color: rgb(255 255 255 / 60%);
+
     cursor: pointer;
+
     background: transparent;
     border: none;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 4rem;
-    z-index: 10;
-    transition: color 0.3s ease, transform 0.3s ease, filter 0.3 ease;
+
+    transform: translateY(-50%);
+
+    transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
 }
 
 .background-navigation-button:hover {
     color: white;
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+
+    filter: drop-shadow(0 0 12px rgb(255 255 255 / 80%));
+
     transform: translateY(-50%) scale(1.1);
 }
 
