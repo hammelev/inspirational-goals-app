@@ -5,6 +5,7 @@ import {
   isPending,
   isRejected,
 } from "@reduxjs/toolkit";
+import { ZodError } from "zod";
 
 import type {
   InspirationalQuotesSliceStateType,
@@ -18,15 +19,17 @@ export const fetchInspirationalQuotes = createAsyncThunk<
   { rejectValue: string }
 >("inspirationalQuotes/fetch", async (_, { rejectWithValue }) => {
   try {
-    const count =
-      parseInt(
-        String(import.meta.env.VITE_QUOTEABLE_NUMBER_OF_RANDOM_QUOTES),
-        10,
-      ) || undefined;
-    const response = await fetchRandomInspirationalQuotes(count);
+    const response = await fetchRandomInspirationalQuotes();
 
     return response;
   } catch (error) {
+    if (error instanceof ZodError) {
+      // Get detailed validation errors from the issues array
+      const validationErrors = error.issues
+        .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
+        .join("; ");
+      return rejectWithValue(`Invalid quote data: ${validationErrors}`);
+    }
     if (error instanceof Error) {
       return rejectWithValue(error.message);
     }

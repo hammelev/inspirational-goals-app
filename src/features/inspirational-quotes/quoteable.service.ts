@@ -1,18 +1,25 @@
+import { z } from "zod";
+
+import { environmentVariables } from "../../env.schema";
 import type { QuoteableQuoteType } from "./inspirational-quotes.types";
+import { QuoteableQuoteSchema } from "./inspirational-quotes.types";
 
-const BASE_URL = String(import.meta.env.VITE_QUOTEABLE_BASE_URL);
-const GET_RANDOM_QUOTES_ENDPOINT = String(
-  import.meta.env.VITE_QUOTEABLE_GET_RANDOM_QUOTES_ENDPOINT,
-);
-const MAX_ALLOWED_QUOTES_TO_FETCH = 50;
+const {
+  VITE_QUOTEABLE_BASE_URL,
+  VITE_QUOTEABLE_GET_RANDOM_QUOTES_ENDPOINT,
+  VITE_QUOTEABLE_NUMBER_OF_RANDOM_QUOTES,
+} = environmentVariables;
 
-export const fetchRandomInspirationalQuotes = async (
-  numOfQuotesToGet = 1,
-): Promise<QuoteableQuoteType[]> => {
-  const url = new URL(BASE_URL + GET_RANDOM_QUOTES_ENDPOINT);
+export const fetchRandomInspirationalQuotes = async (): Promise<
+  QuoteableQuoteType[]
+> => {
+  const url = new URL(
+    VITE_QUOTEABLE_GET_RANDOM_QUOTES_ENDPOINT,
+    VITE_QUOTEABLE_BASE_URL,
+  );
   url.searchParams.append(
     "limit",
-    Math.min(MAX_ALLOWED_QUOTES_TO_FETCH, numOfQuotesToGet).toString(),
+    VITE_QUOTEABLE_NUMBER_OF_RANDOM_QUOTES.toString(),
   );
 
   const response = await fetch(url);
@@ -24,7 +31,7 @@ export const fetchRandomInspirationalQuotes = async (
     );
   }
 
-  const data = (await response.json()) as QuoteableQuoteType[];
+  const data = z.array(QuoteableQuoteSchema).parse(await response.json());
 
   return data;
 };

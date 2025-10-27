@@ -1,11 +1,15 @@
-export interface QuoteableQuoteType {
-  _id: string;
-  content: string;
-  author: string;
-  authorSlug: string;
-  length: number;
-  tags: string[];
-}
+import { z } from "zod";
+
+export const QuoteableQuoteSchema = z.object({
+  _id: z.string(),
+  content: z.string(),
+  author: z.string(),
+  authorSlug: z.string(),
+  length: z.number(),
+  tags: z.array(z.string()),
+});
+
+export type QuoteableQuoteType = z.infer<typeof QuoteableQuoteSchema>;
 
 export interface InspirationalQuotesSliceStateType {
   quotes: QuoteableQuoteType[];

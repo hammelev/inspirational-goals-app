@@ -5,6 +5,7 @@ import {
   isPending,
   isRejected,
 } from "@reduxjs/toolkit";
+import { ZodError } from "zod";
 
 import type {
   BackGroundImageFetchReasonsType,
@@ -13,17 +14,6 @@ import type {
 } from "./background-images.types";
 import { BACKGROUND_IMAGE_FETCH_REASONS } from "./background-images.types";
 import { fetchRandomImages } from "./unsplash.service";
-
-const numberOfImagesToGetInput = Number(
-  import.meta.env.VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES,
-);
-
-const numberOfImagesToGet =
-  0 < numberOfImagesToGetInput && numberOfImagesToGetInput <= 30
-    ? numberOfImagesToGetInput
-    : 10;
-
-const onInitLoadNumOfImages = numberOfImagesToGet * 2;
 
 export const fetchRandomBackgroundImages = createAsyncThunk<
   {
@@ -34,13 +24,17 @@ export const fetchRandomBackgroundImages = createAsyncThunk<
   { rejectValue: string }
 >("backgroundImages/fetch", async ({ fetchReason }, { rejectWithValue }) => {
   try {
-    const newImages =
-      fetchReason === BACKGROUND_IMAGE_FETCH_REASONS.INIT
-        ? await fetchRandomImages(onInitLoadNumOfImages)
-        : await fetchRandomImages(numberOfImagesToGet);
+    const newImages = await fetchRandomImages();
 
     return { newImages, fetchReason };
   } catch (error) {
+    if (error instanceof ZodError) {
+      // Get detailed validation errors from the issues array
+      const validationErrors = error.issues
+        .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
+        .join("; ");
+      return rejectWithValue(`Invalid image data: ${validationErrors}`);
+    }
     if (error instanceof Error) {
       return rejectWithValue(error.message);
     }

@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx --config ./config/eslint.config.js",
+    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx --config ./config/eslint.config.js --cache --concurrency auto",
     "lint:css": "stylelint \"**/*.{css,scss}\" --config ./config/stylelint.config.mjs",
     "lint:css:fix": "stylelint \"**/*.{css,scss}\" --config ./config/stylelint.config.mjs --fix",
     "lint": "pnpm run lint:js && pnpm run lint:css",
@@ -18,7 +18,8 @@
     "@reduxjs/toolkit": "^2.9.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
