@@ -1,13 +1,13 @@
-export interface UnsplashImageType {
-  urls: {
-    full: string;
-    raw: string;
-    regular: string;
-    small: string;
-    thumb: string;
-  };
-  alt_description: string;
-}
+import { z } from "zod";
+
+export const UnsplashImageSchema = z.object({
+  urls: z.object({
+    regular: z.string(),
+  }),
+  alt_description: z.string(),
+});
+
+export type UnsplashImageType = z.infer<typeof UnsplashImageSchema>;
 
 export const BACKGROUND_IMAGE_FETCH_REASONS = {
   INIT: "INIT",

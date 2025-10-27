@@ -1,0 +1,35 @@
+import { z } from "zod";
+
+/**
+ * Makes empty strings undefined before passing to the schema.
+ * Preserves the output type of the schema.
+ */
+const emptyStringIsUndefined = <T>(schema: z.ZodType<T>) =>
+  z.preprocess((val) => (val === "" ? undefined : val), schema);
+
+const EnvironmentVariableSchema = z.object({
+  // Quoteable env variables
+  VITE_QUOTEABLE_BASE_URL: z.url(),
+  VITE_QUOTEABLE_GET_RANDOM_QUOTES_ENDPOINT: z.string(),
+  VITE_QUOTEABLE_NUMBER_OF_RANDOM_QUOTES: emptyStringIsUndefined(
+    z.coerce.number().min(1).max(50).optional().default(10),
+  ),
+  // Unsplash env variables
+  VITE_UNSPLASH_BASE_URL: z.url(),
+  VITE_UNSPLASH_GET_RANDOM_IMAGES_ENDPOINT: z.string(),
+  VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES: emptyStringIsUndefined(
+    z.coerce.number().min(1).max(30).optional().default(10),
+  ),
+  VITE_UNSPLASH_ACCESS_KEY: z.string(),
+});
+
+export type EnvironmentVariablesType = z.infer<
+  typeof EnvironmentVariableSchema
+>;
+
+export const environmentVariables = EnvironmentVariableSchema.parse(
+  import.meta.env,
+  {
+    reportInput: true,
+  },
+);
