@@ -3,11 +3,16 @@ import PrimaryContainer from "../../components/PrimaryContainer";
 import styles from "./goals.module.css";
 
 export default function GoalForm() {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // TODO: Add goal submission logic here
+  };
   return (
     <PrimaryContainer className={styles["goal-form-container"]}>
-      <h1>Add a Goal</h1>
-      <hr />
-      <form className={styles["goal-form"]}>
+      <div className={styles["header"]}>
+        <h1>Add a Goal</h1>
+      </div>
+      <form onSubmit={handleSubmit} className={styles["goal-form"]}>
         <input
           type="text"
           aria-label="Enter your goal"
@@ -17,7 +22,7 @@ export default function GoalForm() {
         <PrimaryButton
           type="submit"
           iconName="add_2"
-          className={`material-symbols-outlined ${styles["goal-form-submit-button"]}`}
+          className={`${styles["goal-form-submit-button"]}`}
         />
       </form>
     </PrimaryContainer>

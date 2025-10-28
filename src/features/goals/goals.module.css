@@ -59,3 +59,11 @@
 
   overflow-y: auto;
 }
+
+.header {
+  width: 100%;
+
+  border: none;
+  border-bottom: thin solid rgb(255 255 255 / 75%);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 75%);
+}
