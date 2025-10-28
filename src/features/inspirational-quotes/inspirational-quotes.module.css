@@ -6,16 +6,17 @@
   gap: 0.25rem;
   align-items: center;
   justify-content: center;
+  justify-self: baseline;
 
   max-width: 80vw;
 
   padding: 0.5rem 0.75rem;
-  margin: auto;
+  margin: 1rem auto;
 
   font-size: 0.75rem;
 
   background-color: var(--container-color-primary);
-  border: 1px solid rgb(255 255 255 / 20%);
+  border: var(--border-default);
   border-radius: 25px;
 
   backdrop-filter: blur(8px);
@@ -39,23 +40,7 @@
 
   width: fit-content;
 
-  padding: 0.15rem 0.3rem;
-
   font-size: inherit;
-
-  color: white;
-
-  cursor: pointer;
-
-  background-color: var(--button-color-primary);
-  border: 1px solid rgb(0 0 0 / 20%);
-  border-radius: 15px;
-}
-
-.quote-update-button:hover {
-  color: black;
-
-  filter: drop-shadow(0 0 12px rgb(255 255 255 / 80%));
 }
 
 .quote-author {
