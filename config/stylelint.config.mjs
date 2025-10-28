@@ -7,6 +7,8 @@ export default {
   plugins: ["stylelint-order"],
   rules: {
     "declaration-empty-line-before": null,
+    "no-duplicate-selectors": true,
+    "declaration-block-no-duplicate-properties": true,
     // Configure the rule manually.
     "order/properties-order": propertyGroups.map((group) => ({
       ...group,

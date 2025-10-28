@@ -1,6 +1,9 @@
 :root {
   /* CSS Custom Properties - alphabetically ordered */
+  --border-default: 1px solid rgb(255 255 255 / 20%);
+  --button-border-primary: 1px solid rgb(0 0 0 / 20%);
   --button-color-primary: #84a98c;
+  --button-text-color-primary: white;
   --container-color-primary: rgb(245 243 244 / 50%);
   --text-color-default: #353839;
 
@@ -9,12 +12,14 @@
 }
 
 #root {
-  padding: 2rem;
-  margin: 0 auto;
-
-  text-align: center;
+  width: 99vw;
+  height: 99vh;
 }
 
 body {
+  margin: 0;
+
   color: var(--text-color-default);
+
+  text-align: center;
 }

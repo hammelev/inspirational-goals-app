@@ -21,6 +21,11 @@ const EnvironmentVariableSchema = z.object({
     z.coerce.number().min(1).max(30).optional().default(10),
   ),
   VITE_UNSPLASH_ACCESS_KEY: z.string(),
+  // Open Weather env variables
+  VITE_OPEN_WEATHER_BASE_URL: z.url(),
+  VITE_OPEN_WEATHER_GET_CURRENT_WEATHER_ENDPOINT: z.string(),
+  VITE_OPEN_WEATHER_ICON_BASE_URL: z.url(),
+  VITE_OPEN_WEATHER_ACCESS_KEY: z.string(),
 });
 
 export type EnvironmentVariablesType = z.infer<
