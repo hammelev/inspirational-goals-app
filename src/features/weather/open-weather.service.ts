@@ -1,7 +1,7 @@
 import { environmentVariables } from "../../env.schema";
 import type { Coordinates } from "../../types/types";
-import { OpenWheatherCurrentWheatherSchema } from "./weather.types";
-import type { OpenWheatherCurrentWheatherType } from "./weather.types";
+import { OpenWeatherCurrentWeatherSchema } from "./weather.types";
+import type { OpenWeatherCurrentWeatherType } from "./weather.types";
 
 const {
   VITE_OPEN_WEATHER_BASE_URL,
@@ -11,7 +11,7 @@ const {
 
 export const fetchCurrentWeather = async (
   cords: Coordinates,
-): Promise<OpenWheatherCurrentWheatherType> => {
+): Promise<OpenWeatherCurrentWeatherType> => {
   const url = new URL(
     VITE_OPEN_WEATHER_GET_CURRENT_WEATHER_ENDPOINT,
     VITE_OPEN_WEATHER_BASE_URL,
@@ -29,7 +29,7 @@ export const fetchCurrentWeather = async (
     );
   }
 
-  const data = OpenWheatherCurrentWheatherSchema.parse(await response.json());
+  const data = OpenWeatherCurrentWeatherSchema.parse(await response.json());
 
   return data;
 };

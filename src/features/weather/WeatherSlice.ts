@@ -9,12 +9,12 @@ import { ZodError } from "zod";
 import type { Coordinates } from "../../types/types";
 import { fetchCurrentWeather } from "./open-weather.service";
 import type {
-  OpenWheatherCurrentWheatherType,
+  OpenWeatherCurrentWeatherType,
   WeatherSliceStateType,
 } from "./weather.types";
 
 export const getCurrentWeather = createAsyncThunk<
-  OpenWheatherCurrentWheatherType,
+  OpenWeatherCurrentWeatherType,
   { cords: Coordinates },
   { rejectValue: string }
 >("weather/getWeather", async (args, { rejectWithValue }) => {
@@ -28,7 +28,7 @@ export const getCurrentWeather = createAsyncThunk<
       const validationErrors = error.issues
         .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
         .join("; ");
-      return rejectWithValue(`Invalid quote data: ${validationErrors}`);
+      return rejectWithValue(`Invalid weather data: ${validationErrors}`);
     }
     if (error instanceof Error) {
       return rejectWithValue(error.message);
@@ -67,6 +67,6 @@ const weatherSlice = createSlice({
 
 export const selectCurrentWeather = (state: {
   weather: WeatherSliceStateType;
-}): OpenWheatherCurrentWheatherType | null => state.weather.currentWeather;
+}): OpenWeatherCurrentWeatherType | null => state.weather.currentWeather;
 
 export default weatherSlice.reducer;

@@ -16,7 +16,7 @@
 }
 
 .refresh-button:hover {
-  color: var(--text-color-primary);
+  color: var(--text-color-default);
 
   filter: drop-shadow(0 0 12px rgb(255 255 255 / 80%));
 }

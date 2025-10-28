@@ -4,14 +4,14 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import RefreshButton from "../../components/RefreshButton";
 import { environmentVariables } from "../../env.schema";
 import { useGeoLocation } from "../../hooks/useGeoLocation";
-import { useGeoLocationErrorCodes } from "../../types/types.ts";
+import { useGeoLocationErrorCodes } from "../../types/types";
 import { getCurrentWeather, selectCurrentWeather } from "./WeatherSlice";
 import styles from "./weather.module.css";
 
 export default function Weather() {
   const dispatch = useAppDispatch();
   const { coordinates, errorCode, retry } = useGeoLocation();
-  const currentWheather = useAppSelector(selectCurrentWeather);
+  const currentWeather = useAppSelector(selectCurrentWeather);
 
   const locationPermissionDeniedErrorMessage =
     "To see weather, allow access to your location";
@@ -44,12 +44,12 @@ export default function Weather() {
       ) : (
         <>
           <img
-            src={`${environmentVariables.VITE_OPEN_WEATHER_ICON_BASE_URL}${currentWheather?.weather[0].icon}.png`}
-            alt={currentWheather?.weather[0].description}
+            src={`${environmentVariables.VITE_OPEN_WEATHER_ICON_BASE_URL}${currentWeather?.weather[0].icon}.png`}
+            alt={currentWeather?.weather[0].description ?? "Weather icon"}
           />
           <div className={styles["weather-info-container"]}>
-            <span>{`${currentWheather?.main.temp}°C, ${currentWheather?.weather[0].main}`}</span>
-            <span>{currentWheather?.name}</span>
+            <span>{`${currentWeather?.main.temp}°C, ${currentWeather?.weather[0].main}`}</span>
+            <span>{currentWeather?.name}</span>
           </div>
         </>
       )}
