@@ -1,0 +1,69 @@
+.goals-container {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5vh;
+
+  width: 80vw;
+  height: 60vh;
+
+  margin: 0 auto;
+}
+
+.goal-form-container {
+  flex-shrink: 0;
+
+  height: fit-content;
+}
+
+.goal-form {
+  display: flex;
+
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem;
+
+  font-size: 1rem;
+}
+
+.goal-form-input-text {
+  width: 40vw;
+
+  padding: 0.3rem 0.2rem;
+
+  font-size: inherit;
+
+  background-color: transparent;
+  border-color: rgb(255 255 255 / 75%);
+  border-width: 0 0 1px;
+  box-shadow: 0 1px 0 rgb(255 255 255 / 20%);
+}
+
+.goal-form-input-text:focus {
+  outline: none;
+
+  border-color: rgb(255 255 255 / 100%);
+  border-width: 0 0 2px;
+}
+
+.goal-form-submit-button {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.goals {
+  flex: 1;
+
+  overflow-y: auto;
+}
+
+.header {
+  width: 100%;
+
+  border: none;
+  border-bottom: thin solid rgb(255 255 255 / 75%);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 75%);
+}

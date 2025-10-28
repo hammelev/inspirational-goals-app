@@ -1,0 +1,7 @@
+.primary-container {
+  background-color: var(--container-color-primary);
+  border: var(--border-default);
+  border-radius: 25px;
+
+  backdrop-filter: blur(8px);
+}

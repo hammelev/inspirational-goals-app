@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import RefreshButton from "../../components/RefreshButton";
+import PrimaryButton from "../../components/PrimaryButton";
+import PrimaryContainer from "../../components/PrimaryContainer";
 import styles from "./inspirational-quotes.module.css";
 import { getNewQuote, selectCurrentQuote } from "./inspirationalQuotesSlice";
 
@@ -18,15 +19,15 @@ export default function InspirationalQuotes() {
   };
 
   return (
-    <div className={styles.quote}>
+    <PrimaryContainer className={styles.quote}>
       <span>{quote?.content}</span>
       <div className={styles["quote-author-and-button-container"]}>
         <span className={styles["quote-author"]}>- {quote?.author}</span>
-        <RefreshButton
+        <PrimaryButton
           onClick={handleGetNewQuote}
           className={styles["quote-update-button"]}
         />
       </div>
-    </div>
+    </PrimaryContainer>
   );
 }

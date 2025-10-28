@@ -14,12 +14,6 @@
   margin: 1rem auto;
 
   font-size: 0.75rem;
-
-  background-color: var(--container-color-primary);
-  border: var(--border-default);
-  border-radius: 25px;
-
-  backdrop-filter: blur(8px);
 }
 
 .quote-author-and-button-container {
