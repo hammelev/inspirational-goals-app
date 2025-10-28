@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import RefreshButton from "../../components/RefreshButton";
+import PrimaryButton from "../../components/PrimaryButton";
+import PrimaryContainer from "../../components/PrimaryContainer";
 import { environmentVariables } from "../../env.schema";
 import { useGeoLocation } from "../../hooks/useGeoLocation";
 import { useGeoLocationErrorCodes } from "../../types/types";
@@ -28,7 +29,7 @@ export default function Weather() {
   }
 
   return (
-    <div className={styles["weather-container"]}>
+    <PrimaryContainer className={styles["weather-container"]}>
       {errorCode ? (
         <div className={styles["weather-error-container"]}>
           <span>
@@ -36,7 +37,7 @@ export default function Weather() {
               ? locationPermissionDeniedErrorMessage
               : unknownLocationErrorMessage}
           </span>
-          <RefreshButton
+          <PrimaryButton
             className={styles["weather-error-refresh-button"]}
             onClick={retry}
           />
@@ -53,6 +54,6 @@ export default function Weather() {
           </div>
         </>
       )}
-    </div>
+    </PrimaryContainer>
   );
 }

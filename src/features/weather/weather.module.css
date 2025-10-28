@@ -12,12 +12,6 @@
   font-size: 0.75rem;
 
   text-align: left;
-
-  background-color: var(--container-color-primary);
-  border: var(--border-default);
-  border-radius: 25px;
-
-  backdrop-filter: blur(8px);
 }
 
 .weather-info-container {
