@@ -27,7 +27,7 @@ export const useGeoLocation = () => {
         enableHighAccuracy: true,
         maximumAge: 60 * 1000,
         timeout: 10 * 1000,
-      }
+      },
     );
   }, []);
 
@@ -41,8 +41,6 @@ export const useGeoLocation = () => {
         name: "geolocation",
       });
 
-      console.log("CHECKING PERMISSIONS: ", status);
-
       if (status.state === "granted") {
         // Permission already granted, get location
         getLocation();
@@ -51,7 +49,7 @@ export const useGeoLocation = () => {
         // First time or previously cleared permission
         const userConsent = window.confirm(
           "This app needs your location to show accurate weather information. " +
-            "Would you like to share your location?"
+            "Would you like to share your location?",
         );
 
         if (userConsent) {
@@ -68,13 +66,13 @@ export const useGeoLocation = () => {
           getLocation(true);
           window.alert(
             "Location permissions not enabled.\n" +
-              "Enable location permission and try again to see current weather"
+              "Enable location permission and try again to see current weather",
           );
         }
         setLoading(false);
       }
     },
-    [getLocation]
+    [getLocation],
   );
 
   useEffect(() => {

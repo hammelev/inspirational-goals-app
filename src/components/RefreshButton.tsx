@@ -8,12 +8,14 @@ export default function RefreshButton({
   className = "",
   ...props
 }: RefreshButtonProps) {
+  const ICON_NAME = "autorenew";
+
   return (
     <button
       {...props}
       className={`material-symbols-outlined ${styles["refresh-button"]} ${className}`}
     >
-      autorenew
+      {ICON_NAME}
     </button>
   );
 }

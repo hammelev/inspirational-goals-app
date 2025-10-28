@@ -13,6 +13,10 @@ export default function Weather() {
   const { coordinates, errorCode, retry } = useGeoLocation();
   const currentWheather = useAppSelector(selectCurrentWeather);
 
+  const locationPermissionDeniedErrorMessage =
+    "To see weather, allow access to your location";
+  const uknownLocationErrorMessage = "Unknown error - try again later";
+
   useEffect(() => {
     if (coordinates) {
       void dispatch(getCurrentWeather({ cords: coordinates }));
@@ -29,8 +33,8 @@ export default function Weather() {
         <div className={styles["weather-error-container"]}>
           <span>
             {errorCode === useGeoLocationErrorCodes.PERMISSION_DENIED
-              ? "To see weather, allow access to your location"
-              : "Unknown error - try again later"}
+              ? locationPermissionDeniedErrorMessage
+              : uknownLocationErrorMessage}
           </span>
           <RefreshButton
             className={styles["weather-error-refresh-button"]}
