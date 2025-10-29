@@ -10,7 +10,7 @@ type ButtonProps = Omit<ComponentPropsWithoutRef<"button">, "children"> & {
 export default function Button({
   className = "",
   iconName,
-  variant,
+  variant = "primary",
   ...props
 }: ButtonProps) {
   return (
