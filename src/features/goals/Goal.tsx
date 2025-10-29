@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { useAppDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import { deleteGoal, toggleGoalCompletion } from "./GoalsSlice";
@@ -13,21 +15,25 @@ export default function Goal({ goal }: GoalProps) {
 
   const { completed, description, id } = goal;
 
-  const handleToggleCompletion = () => dispatch(toggleGoalCompletion(id));
-  const handleDelete = () => dispatch(deleteGoal(id));
+  const handleToggleCompletion = useCallback(
+    () => dispatch(toggleGoalCompletion(id)),
+    [dispatch, id],
+  );
+  const handleDelete = useCallback(
+    () => dispatch(deleteGoal(id)),
+    [dispatch, id],
+  );
   return (
     <li className={`${styles.goal} ${completed ? styles.completed : ""}`}>
       <span>{description}</span>
       <div className={styles["goal-actions"]}>
         {completed ? (
-          <>
-            <Button
-              variant="secondary"
-              iconName="undo"
-              onClick={handleToggleCompletion}
-              title="Reactivate Goal"
-            />
-          </>
+          <Button
+            variant="secondary"
+            iconName="undo"
+            onClick={handleToggleCompletion}
+            title="Reactivate Goal"
+          />
         ) : (
           <Button
             variant="primary"

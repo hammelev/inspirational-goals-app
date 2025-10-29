@@ -28,6 +28,7 @@ export default function InspirationalQuotes() {
           className={styles["quote-update-button"]}
           variant="primary"
           iconName="autorenew"
+          title="Get New Quote"
         />
       </div>
     </PrimaryContainer>

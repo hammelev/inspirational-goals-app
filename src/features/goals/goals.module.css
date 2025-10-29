@@ -107,7 +107,8 @@
 
   color: var(--text-color-default);
 
-  word-break: break-all;
+  hyphens: auto;
+  overflow-wrap: anywhere;
 
   border-radius: 12px;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
@@ -122,10 +123,6 @@
 
   transform: translateY(-2px);
 }
-
-/* .goal-description {
-  word-break: break-all;
-} */
 
 .goal-actions {
   display: flex;

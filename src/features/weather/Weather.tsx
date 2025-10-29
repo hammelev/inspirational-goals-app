@@ -41,7 +41,8 @@ export default function Weather() {
             className={styles["weather-error-refresh-button"]}
             onClick={retry}
             variant="primary"
-            iconName="refresh"
+            iconName="autorenew"
+            title="Retry"
           />
         </div>
       ) : (
