@@ -90,6 +90,10 @@
   list-style: none;
 }
 
+.goal-list-placeholder {
+  margin: 0 auto;
+}
+
 .goal {
   padding: 1rem;
 

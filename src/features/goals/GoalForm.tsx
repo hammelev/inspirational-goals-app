@@ -1,10 +1,10 @@
 import { useState } from "react";
 
+import { useAppDispatch } from "../../app/hooks";
 import PrimaryButton from "../../components/PrimaryButton";
 import PrimaryContainer from "../../components/PrimaryContainer";
-import styles from "./goals.module.css";
-import { useAppDispatch } from "../../app/hooks";
 import { addGoal } from "./GoalsSlice";
+import styles from "./goals.module.css";
 
 export default function GoalForm() {
   const dispatch = useAppDispatch();
@@ -13,8 +13,10 @@ export default function GoalForm() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(addGoal(description));
-    setDescription("");
+    if (description.trim() !== "") {
+      dispatch(addGoal(description.trimEnd()));
+      setDescription("");
+    }
   };
   return (
     <PrimaryContainer className={styles["goal-form-container"]}>

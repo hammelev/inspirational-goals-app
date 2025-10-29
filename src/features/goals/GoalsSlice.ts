@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
+
 import type { GoalsStateType } from "./goals.types";
 
 const initialState: GoalsStateType = {
@@ -11,7 +13,7 @@ const goalsSlice = createSlice({
   reducers: {
     addGoal(state, action: { payload: string }) {
       state.goals.push({
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         description: action.payload,
         completed: false,
       });

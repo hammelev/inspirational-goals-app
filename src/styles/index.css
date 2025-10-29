@@ -6,11 +6,11 @@
   --button-text-color-primary: white;
   --container-color-primary: rgb(245 243 244 / 50%);
   --text-color-default: #353839;
-  
+
   /* Goal item colors - using a soft, modern palette with good contrast */
-  --goal-color-1: rgb(144 190 219 / 85%);  /* Soft blue */
-  --goal-color-2: rgb(249 132 74 / 85%);   /* Soft orange */
-  --goal-color-3: rgb(147 180 142 / 85%);   /* Soft green */
+  --goal-color-1: rgb(144 190 219 / 85%); /* Soft blue */
+  --goal-color-2: rgb(249 132 74 / 85%); /* Soft orange */
+  --goal-color-3: rgb(147 180 142 / 85%); /* Soft green */
 
   /* Other root styles */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
