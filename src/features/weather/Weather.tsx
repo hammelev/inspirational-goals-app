@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import PrimaryButton from "../../components/PrimaryButton";
+import Button from "../../components/Button";
 import PrimaryContainer from "../../components/PrimaryContainer";
 import { environmentVariables } from "../../env.schema";
 import { useGeoLocation } from "../../hooks/useGeoLocation";
@@ -37,9 +37,12 @@ export default function Weather() {
               ? locationPermissionDeniedErrorMessage
               : unknownLocationErrorMessage}
           </span>
-          <PrimaryButton
+          <Button
             className={styles["weather-error-refresh-button"]}
             onClick={retry}
+            variant="primary"
+            iconName="autorenew"
+            title="Retry"
           />
         </div>
       ) : (
