@@ -24,7 +24,7 @@ export default function Goal({ goal }: GoalProps) {
     [dispatch, id],
   );
   return (
-    <li className={`${styles.goal} ${completed ? styles.completed : ""}`}>
+    <div className={`${styles.goal} ${completed ? styles.completed : ""}`}>
       <span>{description}</span>
       <div className={styles["goal-actions"]}>
         {completed ? (
@@ -49,6 +49,6 @@ export default function Goal({ goal }: GoalProps) {
           title="Delete Goal"
         />
       </div>
-    </li>
+    </div>
   );
 }
