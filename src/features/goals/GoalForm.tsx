@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useAppDispatch } from "../../app/hooks";
-import PrimaryButton from "../../components/PrimaryButton";
+import Button from "../../components/Button";
 import PrimaryContainer from "../../components/PrimaryContainer";
 import { addGoal } from "./GoalsSlice";
 import styles from "./goals.module.css";
@@ -33,10 +33,12 @@ export default function GoalForm() {
           placeholder="Enter your goal"
           className={styles["goal-form-input-text"]}
         />
-        <PrimaryButton
-          type="submit"
+        <Button
+          className={styles["goal-form-submit-button"]}
           iconName="add_2"
-          className={`${styles["goal-form-submit-button"]}`}
+          title="Add goal"
+          type="submit"
+          variant="primary"
         />
       </form>
     </PrimaryContainer>

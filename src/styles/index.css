@@ -2,15 +2,24 @@
   /* CSS Custom Properties - alphabetically ordered */
   --border-default: 1px solid rgb(255 255 255 / 20%);
   --button-border-primary: 1px solid rgb(0 0 0 / 20%);
+  --button-color-destructive: #e57373; /* Soft Red */
   --button-color-primary: #84a98c;
+  --button-color-secondary: #bdbdbd; /* Neutral Gray */
+  --button-text-color-destructive: white;
   --button-text-color-primary: white;
+  --button-text-color-secondary: black;
   --container-color-primary: rgb(245 243 244 / 50%);
   --text-color-default: #353839;
 
-  /* Goal item colors - using a soft, modern palette with good contrast */
-  --goal-color-1: rgb(144 190 219 / 85%); /* Soft blue */
-  --goal-color-2: rgb(249 132 74 / 85%); /* Soft orange */
-  --goal-color-3: rgb(147 180 142 / 85%); /* Soft green */
+  /* Goal item colors - using a sophisticated palette with improved contrast */
+  --goal-color-1: rgb(229 219 238 / 90%); /* Gentle lilac */
+  --goal-color-2: rgb(255 236 179 / 90%); /* Soft yellow */
+  --goal-color-3: rgb(198 219 239 / 90%); /* Muted blue */
+
+  /* Completed goal colors */
+  --goal-completed-background: rgb(226 232 240 / 75%);
+  --goal-completed-text: #6b7280;
+  --goal-completed-shadow: rgb(0 0 0 / 8%);
 
   /* Other root styles */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
