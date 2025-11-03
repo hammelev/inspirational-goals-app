@@ -1,15 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
+import { getGoals } from "./goals.repository";
 import type { GoalsStateType } from "./goals.types";
 
-const initialState: GoalsStateType = {
-  goals: [],
+const initializeState: () => GoalsStateType = () => {
+  try {
+    const savedgoals = getGoals();
+
+    return {
+      goals: savedgoals,
+    };
+  } catch {
+    return {
+      goals: [],
+    };
+  }
 };
 
 const goalsSlice = createSlice({
   name: "goals",
-  initialState,
+  initialState: initializeState,
   reducers: {
     addGoal(state, action: { payload: string }) {
       state.goals.push({
@@ -28,10 +39,12 @@ const goalsSlice = createSlice({
       }
     },
   },
+  selectors: {
+    selectGoals: (state) => state.goals,
+  },
 });
 
-export const selectGoals = (state: { goals: GoalsStateType }) =>
-  state.goals.goals;
+export const { selectGoals } = goalsSlice.selectors;
 
 export const { addGoal, deleteGoal, toggleGoalCompletion } = goalsSlice.actions;
 

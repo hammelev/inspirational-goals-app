@@ -34,6 +34,7 @@
   "scss.validate": false,
   "stylelint.configFile": "config/stylelint.config.mjs",
   "eslint.options": { "overrideConfigFile": "./config/eslint.config.js" },
+  "prettier.configPath": "config/prettier.config.js",
   "stylelint.enable": true,
   "stylelint.validate": ["css", "scss"]
 }

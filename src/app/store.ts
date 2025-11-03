@@ -5,6 +5,7 @@ import backgroundImagesReducer from "../features/background-images/backgroundIma
 import goalsReducer from "../features/goals/GoalsSlice";
 import inspirationalQuotesReducer from "../features/inspirational-quotes/inspirationalQuotesSlice";
 import weatherReducer from "../features/weather/WeatherSlice";
+import { listenerMiddleware } from "./listenerMiddleware";
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,8 @@ const store = configureStore({
     inspirationalQuotes: inspirationalQuotesReducer,
     weather: weatherReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 });
 
 export type AppStoreType = typeof store;
