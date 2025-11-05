@@ -4,9 +4,9 @@ import { GoalSchema } from "./goals.types";
 const STORAGE_KEY = "goals";
 
 const getGoals = (): GoalTypeSaveResultType => {
-  const goals = window.localStorage.getItem(STORAGE_KEY);
-  if (!goals) return { success: true, payload: [] };
   try {
+    const goals = window.localStorage.getItem(STORAGE_KEY);
+    if (!goals) return { success: true, payload: [] };
     const goalsParsed = GoalSchema.array().parse(JSON.parse(goals));
     return { success: true, payload: goalsParsed };
   } catch (error) {
