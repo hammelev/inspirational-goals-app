@@ -1,4 +1,4 @@
-import type { Action, ThunkAction } from "@reduxjs/toolkit";
+import type { Action, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import {
   createAsyncThunk,
   createSlice,
@@ -96,7 +96,7 @@ const backgroundImagesSlice = createSlice({
   name: "backgroundImages",
   initialState,
   reducers: {
-    setCurrentDisplayImageIndex(state, action: { payload: number }) {
+    setCurrentDisplayImageIndex(state, action: PayloadAction<number>) {
       state.currentDisplayImageIndex = action.payload;
     },
   },

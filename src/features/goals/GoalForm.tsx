@@ -13,8 +13,9 @@ export default function GoalForm() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (description.trim() !== "") {
-      dispatch(addGoal(description.trimEnd()));
+    const trimmedDescription = description.trim();
+    if (trimmedDescription !== "") {
+      dispatch(addGoal(trimmedDescription));
       setDescription("");
     }
   };
