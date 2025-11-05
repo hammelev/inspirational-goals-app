@@ -10,7 +10,6 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-*.local
 .eslintcache
 
 # Environment files
@@ -28,3 +27,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local Netlify folder
+.netlify
+
+# Deno lock file (not needed for Node.js/pnpm projects)
+deno.lock
