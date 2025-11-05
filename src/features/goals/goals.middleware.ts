@@ -1,7 +1,12 @@
 import { isAnyOf } from "@reduxjs/toolkit";
 
 import type { startAppListeningType } from "../../app/listenerMiddleware";
-import { addGoal, deleteGoal, toggleGoalCompletion } from "./GoalsSlice";
+import {
+  addGoal,
+  deleteGoal,
+  selectGoals,
+  toggleGoalCompletion,
+} from "./GoalsSlice";
 import { saveGoals } from "./goals.repository";
 
 export const listenForUpdatesToGoals = (
@@ -10,11 +15,7 @@ export const listenForUpdatesToGoals = (
   startListening({
     matcher: isAnyOf(addGoal, deleteGoal, toggleGoalCompletion),
     effect: (_, listenerApi) => {
-      try {
-        saveGoals(listenerApi.getState().goals.goals);
-      } catch (e) {
-        console.error("Failed to save goals:", e);
-      }
+      saveGoals(selectGoals(listenerApi.getState()));
     },
   });
 };

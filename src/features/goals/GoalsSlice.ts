@@ -5,17 +5,11 @@ import { getGoals } from "./goals.repository";
 import type { GoalsStateType } from "./goals.types";
 
 const initializeState: () => GoalsStateType = () => {
-  try {
-    const savedgoals = getGoals();
+  const savedgoals = getGoals();
 
-    return {
-      goals: savedgoals,
-    };
-  } catch {
-    return {
-      goals: [],
-    };
-  }
+  return {
+    goals: savedgoals.success ? savedgoals.payload : [],
+  };
 };
 
 const goalsSlice = createSlice({

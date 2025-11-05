@@ -11,3 +11,13 @@ export type GoalType = z.infer<typeof GoalSchema>;
 export interface GoalsStateType {
   goals: GoalType[];
 }
+
+export type GoalTypeSaveResultType =
+  | {
+      success: true;
+      payload: GoalType[];
+    }
+  | {
+      success: false;
+      error: string;
+    };
