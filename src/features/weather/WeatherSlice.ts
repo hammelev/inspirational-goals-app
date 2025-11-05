@@ -1,4 +1,5 @@
 import {
+  type PayloadAction,
   createAsyncThunk,
   createSlice,
   isPending,
@@ -49,19 +50,25 @@ const weatherSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getCurrentWeather.fulfilled, (state, action) => {
-      state.currentWeather = action.payload;
-    });
+    builder.addCase(
+      getCurrentWeather.fulfilled,
+      (state, action: PayloadAction<OpenWeatherCurrentWeatherType>) => {
+        state.currentWeather = action.payload;
+      },
+    );
     builder.addMatcher(isPending(getCurrentWeather), (state) => {
       state.isLoading = true;
       state.hasError = false;
       state.errorMessage = null;
     });
-    builder.addMatcher(isRejected(getCurrentWeather), (state, action) => {
-      state.errorMessage = action.payload ?? "An unknown error occurred.";
-      state.hasError = true;
-      state.isLoading = false;
-    });
+    builder.addMatcher(
+      isRejected(getCurrentWeather),
+      (state, action: PayloadAction<string | undefined>) => {
+        state.errorMessage = action.payload ?? "An unknown error occurred.";
+        state.hasError = true;
+        state.isLoading = false;
+      },
+    );
   },
 });
 

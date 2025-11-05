@@ -1,4 +1,4 @@
-import type { Action, ThunkAction } from "@reduxjs/toolkit";
+import type { Action, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import {
   createAsyncThunk,
   createSlice,
@@ -66,7 +66,7 @@ const inspirationalQuotesSlice = createSlice({
   name: "inspirationalQuotes",
   initialState,
   reducers: {
-    setCurrentQuoteIndex(state, action: { payload: number }) {
+    setCurrentQuoteIndex(state, action: PayloadAction<number>) {
       state.currentQuoteIndex = action.payload;
     },
   },

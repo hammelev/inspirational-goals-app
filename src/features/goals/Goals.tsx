@@ -13,7 +13,7 @@ export default function Goals() {
         <h1>My Goals</h1>
       </div>
       <ul className={styles["goals-list"]}>
-        {0 < goals.length ? (
+        {goals.length > 0 ? (
           goals.map((goal) => (
             <li key={goal.id}>
               <Goal goal={goal} />
