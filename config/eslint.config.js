@@ -10,14 +10,20 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig([
   {
-    ignores: ["node_modules/", "dist/", "config/"],
+    ignores: ["node_modules/", "dist/", ".netlify"],
   },
 
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   eslintImport.flatConfigs.typescript,
+  // Node.js environment config (serverless functions, shared code, vite config, config files)
   {
-    files: ["vite.config.ts"], // Add any other root config files here
+    files: [
+      "netlify/**/*.{ts,mts}",
+      "shared/**/*.ts",
+      "config/**/*.{ts,js,mjs}",
+      "vite.config.ts",
+    ],
     languageOptions: {
       globals: globals.node,
       parserOptions: {
@@ -27,8 +33,9 @@ export default defineConfig([
     },
   },
 
+  // React application config
   {
-    files: ["src/**/*.{ts,js,tsx,jsx}"],
+    files: ["src/**/*.{ts,tsx}"],
     plugins: {
       react,
       "react-hooks": reactHooks,
@@ -43,11 +50,7 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: {
         tsconfigRootDir: import.meta.dirname,
-        project: [
-          "../tsconfig.json",
-          "./tsconfig.app.json",
-          "./tsconfig.node.json",
-        ],
+        project: ["./tsconfig.app.json"],
       },
     },
     rules: {

@@ -9,9 +9,8 @@ const emptyStringIsUndefined = <T>(schema: z.ZodType<T>) =>
 
 const EnvironmentVariableSchema = z.object({
   // Quoteable env variables
-  VITE_QUOTEABLE_BASE_URL: z.url(),
-  VITE_QUOTEABLE_GET_RANDOM_QUOTES_ENDPOINT: z.string(),
-  VITE_QUOTEABLE_NUMBER_OF_RANDOM_QUOTES: emptyStringIsUndefined(
+  VITE_QUOTES_RANDOM_QUOTES_ENDPOINT: z.string(),
+  VITE_QUOTES_RANDOM_QUOTES_NUMBER: emptyStringIsUndefined(
     z.coerce.number().min(1).max(50).optional().default(10),
   ),
   // Unsplash env variables
