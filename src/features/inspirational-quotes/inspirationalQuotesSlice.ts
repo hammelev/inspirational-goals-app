@@ -1,3 +1,4 @@
+import type { QuoteableQuoteType } from "#shared/api-types";
 import type { Action, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import {
   createAsyncThunk,
@@ -7,10 +8,7 @@ import {
 } from "@reduxjs/toolkit";
 import { ZodError } from "zod";
 
-import type {
-  InspirationalQuotesSliceStateType,
-  QuoteableQuoteType,
-} from "./inspirational-quotes.types";
+import type { InspirationalQuotesSliceStateType } from "./inspirational-quotes.types";
 import { fetchRandomInspirationalQuotes } from "./quoteable.service";
 
 export const fetchInspirationalQuotes = createAsyncThunk<
