@@ -1,7 +1,7 @@
 import {
   QuoteableQuoteSchema,
   type QuoteableQuoteType,
-} from "shared/api-types";
+} from "#shared/api-types";
 import { z } from "zod";
 
 import { environmentVariables } from "../../env.schema";

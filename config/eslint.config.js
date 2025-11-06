@@ -10,16 +10,20 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig([
   {
-    ignores: ["node_modules/", "dist/", "config/", ".netlify"],
+    ignores: ["node_modules/", "dist/", ".netlify"],
   },
 
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   eslintImport.flatConfigs.typescript,
-  // Node.js environment config (serverless functions, config files)
+  // Node.js environment config (serverless functions, shared code, vite config, config files)
   {
-    files: ["**/*.ts", "**/*.mts"],
-    ignores: ["src/**/*"],
+    files: [
+      "netlify/**/*.{ts,mts}",
+      "shared/**/*.ts",
+      "config/**/*.{ts,js,mjs}",
+      "vite.config.ts",
+    ],
     languageOptions: {
       globals: globals.node,
       parserOptions: {

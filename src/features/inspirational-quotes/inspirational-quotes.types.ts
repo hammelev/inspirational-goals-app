@@ -1,4 +1,4 @@
-import { type QuoteableQuoteType } from "shared/api-types";
+import { type QuoteableQuoteType } from "#shared/api-types";
 
 export interface InspirationalQuotesSliceStateType {
   quotes: QuoteableQuoteType[];

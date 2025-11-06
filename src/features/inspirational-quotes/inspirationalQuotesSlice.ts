@@ -1,3 +1,4 @@
+import type { QuoteableQuoteType } from "#shared/api-types";
 import type { Action, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import {
   createAsyncThunk,
@@ -5,7 +6,6 @@ import {
   isPending,
   isRejected,
 } from "@reduxjs/toolkit";
-import type { QuoteableQuoteType } from "shared/api-types";
 import { ZodError } from "zod";
 
 import type { InspirationalQuotesSliceStateType } from "./inspirational-quotes.types";

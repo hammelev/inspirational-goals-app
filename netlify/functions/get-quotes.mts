@@ -1,8 +1,8 @@
+import { QuoteableQuoteSchema } from "#shared/api-types";
 import type { Handler } from "@netlify/functions";
 import https from "https";
 import { z } from "zod";
 
-import { QuoteableQuoteSchema } from "../../shared/api-types";
 import {
   QuoteableQueryParamsSchema,
   QuoteableSchema,
@@ -47,7 +47,6 @@ function fetchInsecure(url: URL): Promise<Response> {
     });
 
     request.on("error", reject);
-    request.end();
   });
 }
 
