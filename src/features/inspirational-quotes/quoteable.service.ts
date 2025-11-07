@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import { environmentVariables } from "../../env.schema";
 
-const { VITE_QUOTES_RANDOM_QUOTES_ENDPOINT, VITE_QUOTES_RANDOM_QUOTES_NUMBER } =
+const { VITE_QUOTES_ENDPOINT_RANDOM_QUOTES, VITE_QUOTES_RANDOM_QUOTES_NUMBER } =
   environmentVariables;
 
 export const fetchRandomInspirationalQuotes = async (): Promise<
@@ -17,7 +17,7 @@ export const fetchRandomInspirationalQuotes = async (): Promise<
   searchParams.append("limit", VITE_QUOTES_RANDOM_QUOTES_NUMBER.toString());
 
   const response = await fetch(
-    `${VITE_QUOTES_RANDOM_QUOTES_ENDPOINT}?${searchParams}`,
+    `${VITE_QUOTES_ENDPOINT_RANDOM_QUOTES}?${searchParams}`,
   );
 
   if (!response.ok) {
