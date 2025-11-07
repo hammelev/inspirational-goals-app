@@ -21,7 +21,7 @@ export const createResponseFromZodError = (
   );
 };
 
-export const createReponseRequestFailed = (errorString: string) => {
+export const createResponseRequestFailed = (errorString: string) => {
   return new Response(
     JSON.stringify({
       error: {

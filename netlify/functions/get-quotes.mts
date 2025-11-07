@@ -8,8 +8,8 @@ import {
   QuoteableSchema,
 } from "../types/input-types";
 import {
-  createReponseRequestFailed,
   createResponseFromZodError,
+  createResponseRequestFailed,
 } from "../util/response-helpers";
 
 /**
@@ -104,13 +104,14 @@ export default async (request: Request) => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.error("Error in get-quotes function:", error);
     if (error instanceof z.ZodError) {
       return createResponseFromZodError(
         ErrorCodes.INVALID_RESPONSE_FROM_API,
         error,
       );
     }
-    return createReponseRequestFailed(
+    return createResponseRequestFailed(
       error instanceof Error ? error.message : "Unknown error",
     );
   }

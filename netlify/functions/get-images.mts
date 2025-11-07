@@ -7,8 +7,8 @@ import {
   UnsplashSchema,
 } from "../types/input-types";
 import {
-  createReponseRequestFailed,
   createResponseFromZodError,
+  createResponseRequestFailed,
 } from "../util/response-helpers";
 
 const envResult = UnsplashSchema.safeParse(process.env);
@@ -51,8 +51,6 @@ export default async (request: Request) => {
     newRequestUrl.searchParams.set("count", paramsResult.data.count.toString());
   }
 
-  console.log(newRequestUrl.toString());
-
   try {
     const response = await fetch(newRequestUrl, { headers });
 
@@ -67,13 +65,15 @@ export default async (request: Request) => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.error("Error in get-images function:", error);
+
     if (error instanceof z.ZodError) {
       return createResponseFromZodError(
         ErrorCodes.INVALID_RESPONSE_FROM_API,
         error,
       );
     }
-    return createReponseRequestFailed(
+    return createResponseRequestFailed(
       error instanceof Error ? error.message : "Unknown error",
     );
   }
