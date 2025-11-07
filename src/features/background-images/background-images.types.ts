@@ -1,13 +1,4 @@
-import { z } from "zod";
-
-export const UnsplashImageSchema = z.object({
-  urls: z.object({
-    regular: z.string(),
-  }),
-  alt_description: z.string(),
-});
-
-export type UnsplashImageType = z.infer<typeof UnsplashImageSchema>;
+import type { UnsplashImageType } from "#shared/api-types";
 
 export const BACKGROUND_IMAGE_FETCH_REASONS = {
   INIT: "INIT",

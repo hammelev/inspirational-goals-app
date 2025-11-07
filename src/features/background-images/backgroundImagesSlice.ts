@@ -1,3 +1,4 @@
+import type { UnsplashImageType } from "#shared/api-types.ts";
 import type { Action, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import {
   createAsyncThunk,
@@ -10,7 +11,6 @@ import { ZodError } from "zod";
 import type {
   BackGroundImageFetchReasonsType,
   BackgroundImagesSliceStateType,
-  UnsplashImageType,
 } from "./background-images.types";
 import { BACKGROUND_IMAGE_FETCH_REASONS } from "./background-images.types";
 import { fetchRandomImages } from "./unsplash.service";
