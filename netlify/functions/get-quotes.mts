@@ -1,5 +1,5 @@
-import { QuoteableQuoteSchema } from "#shared/api-types";
-import type { Handler } from "@netlify/functions";
+import { QuoteableQuoteSchema } from "#shared/api-types.ts";
+import { ErrorCodes } from "#shared/error-codes.ts";
 import https from "https";
 import { z } from "zod";
 
@@ -7,6 +7,10 @@ import {
   QuoteableQueryParamsSchema,
   QuoteableSchema,
 } from "../types/input-types";
+import {
+  createReponseRequestFailed,
+  createResponseFromZodError,
+} from "../util/response-helpers";
 
 /**
  * Makes an HTTPS request ignoring certificate validation
@@ -59,33 +63,26 @@ if (!envResult.success) {
   );
 }
 
-export const handler: Handler = async (event) => {
+export default async (request: Request) => {
   // If environment validation failed, return error response
   if (!envResult.success) {
-    return {
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        error:
-          "Server configuration error - environment variables missing or invalid",
-      }),
-    };
+    return createResponseFromZodError(
+      ErrorCodes.INVALID_SERVER_CONFIG,
+      envResult.error,
+    );
   }
 
-  const { QUOTEABLE_BASE_URL, QUOTEABLE_GET_RANDOM_QUOTES_ENDPOINT } =
+  const { QUOTEABLE_BASE_URL, QUOTEABLE_ENDPOINT_GET_RANDOM_QUOTES } =
     envResult.data;
 
   const newRequestUrl = new URL(
-    QUOTEABLE_GET_RANDOM_QUOTES_ENDPOINT,
+    QUOTEABLE_ENDPOINT_GET_RANDOM_QUOTES,
     QUOTEABLE_BASE_URL,
   );
 
   // Parse and validate query parameters
-  const queryParams = event.rawQuery
-    ? Object.fromEntries(new URLSearchParams(event.rawQuery))
-    : {};
+  const url = new URL(request.url);
+  const queryParams = Object.fromEntries(url.searchParams.entries());
   const paramsResult = QuoteableQueryParamsSchema.safeParse(queryParams);
 
   // Illegal limit value => fallback to default behaviour of the Quoteable API when it is not provided.
@@ -102,26 +99,19 @@ export const handler: Handler = async (event) => {
 
     const data = z.array(QuoteableQuoteSchema).parse(await response.json());
 
-    return {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
+    return new Response(JSON.stringify(data), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
-    console.error("Function error:", error);
-    return {
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        error:
-          error instanceof z.ZodError
-            ? "Invalid response from Quoteable"
-            : "Failed to fetch quotes via proxy.",
-      }),
-    };
+    if (error instanceof z.ZodError) {
+      return createResponseFromZodError(
+        ErrorCodes.INVALID_RESPONSE_FROM_API,
+        error,
+      );
+    }
+    return createReponseRequestFailed(
+      error instanceof Error ? error.message : "Unknown error",
+    );
   }
 };

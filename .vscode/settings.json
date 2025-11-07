@@ -24,7 +24,7 @@
   "eslint.enable": true,
   "eslint.format.enable": false,
   "eslint.lintTask.enable": true,
-  "eslint.validate": [
+  "eslint.probe": [
     "javascript",
     "javascriptreact",
     "typescript",
