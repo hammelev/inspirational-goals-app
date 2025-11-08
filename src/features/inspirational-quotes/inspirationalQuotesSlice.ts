@@ -9,7 +9,7 @@ import {
 import { ZodError } from "zod";
 
 import type { InspirationalQuotesSliceStateType } from "./inspirational-quotes.types";
-import { fetchRandomInspirationalQuotes } from "./quoteable.service";
+import { fetchRandomInspirationalQuotes } from "./quotes.service";
 
 export const fetchInspirationalQuotes = createAsyncThunk<
   QuoteableQuoteType[],

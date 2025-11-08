@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Button from "../../components/Button";
 import PrimaryContainer from "../../components/PrimaryContainer";
-import { environmentVariables } from "../../env.schema";
 import { useGeoLocation } from "../../hooks/useGeoLocation";
 import { useGeoLocationErrorCodes } from "../../types/types";
 import { getCurrentWeather, selectCurrentWeather } from "./WeatherSlice";
@@ -48,7 +47,7 @@ export default function Weather() {
       ) : (
         <>
           <img
-            src={`${environmentVariables.VITE_OPEN_WEATHER_ICON_BASE_URL}${currentWeather?.weather[0].icon}.png`}
+            src={currentWeather?.weather[0].icon}
             alt={currentWeather?.weather[0].description ?? "Weather icon"}
           />
           <div className={styles["weather-info-container"]}>

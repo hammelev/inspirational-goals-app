@@ -1,3 +1,4 @@
+import type { OpenWeatherCurrentWeatherType } from "#shared/api-types";
 import {
   type PayloadAction,
   createAsyncThunk,
@@ -8,11 +9,8 @@ import {
 import { ZodError } from "zod";
 
 import type { Coordinates } from "../../types/types";
-import { fetchCurrentWeather } from "./open-weather.service";
-import type {
-  OpenWeatherCurrentWeatherType,
-  WeatherSliceStateType,
-} from "./weather.types";
+import { fetchCurrentWeather } from "./weather.service";
+import type { WeatherSliceStateType } from "./weather.types";
 
 export const getCurrentWeather = createAsyncThunk<
   OpenWeatherCurrentWeatherType,
