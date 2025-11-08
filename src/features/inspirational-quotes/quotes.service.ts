@@ -1,7 +1,4 @@
-import {
-  QuoteableQuoteSchema,
-  type QuoteableQuoteType,
-} from "#shared/api-types";
+import { QuotableQuoteSchema, type QuotableQuoteType } from "#shared/api-types";
 import { z } from "zod";
 
 import { environmentVariables } from "../../env.schema";
@@ -10,7 +7,7 @@ const { VITE_QUOTES_ENDPOINT_RANDOM_QUOTES, VITE_QUOTES_RANDOM_QUOTES_NUMBER } =
   environmentVariables;
 
 export const fetchRandomInspirationalQuotes = async (): Promise<
-  QuoteableQuoteType[]
+  QuotableQuoteType[]
 > => {
   const searchParams = new URLSearchParams();
 
@@ -27,7 +24,7 @@ export const fetchRandomInspirationalQuotes = async (): Promise<
     );
   }
 
-  const data = z.array(QuoteableQuoteSchema).parse(await response.json());
+  const data = z.array(QuotableQuoteSchema).parse(await response.json());
 
   return data;
 };

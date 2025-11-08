@@ -4,20 +4,17 @@ import { z } from "zod";
 import { environmentVariables } from "../../env.schema";
 
 const {
-  VITE_UNSPLASH_ENDPOINT_GET_RANDOM_IMAGES,
-  VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES,
+  VITE_IMAGES_ENDPOINT_GET_RANDOM_IMAGES,
+  VITE_IMAGES_NUMBER_OF_RANDOM_IMAGES,
 } = environmentVariables;
 
 export const fetchRandomImages = async (): Promise<UnsplashImageType[]> => {
   const searchParams = new URLSearchParams();
 
-  searchParams.append(
-    "count",
-    VITE_UNSPLASH_NUMBER_OF_RANDOM_IMAGES.toString(),
-  );
+  searchParams.append("count", VITE_IMAGES_NUMBER_OF_RANDOM_IMAGES.toString());
 
   const response = await fetch(
-    `${VITE_UNSPLASH_ENDPOINT_GET_RANDOM_IMAGES}?${searchParams}`,
+    `${VITE_IMAGES_ENDPOINT_GET_RANDOM_IMAGES}?${searchParams}`,
   );
 
   if (!response.ok) {
