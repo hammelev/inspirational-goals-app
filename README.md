@@ -22,27 +22,24 @@
 
 ## Environment Setup
 
-This project uses a multi-file environment configuration:
+This project uses a two-tier configuration approach:
 
-- `.env` - Base configuration, committed to git. Contains default values and public variables
-- `.env.local` - Local overrides and secrets, NOT committed to git
+1. **Base configuration** (`.env`): Contains non-sensitive default values and public configuration. Committed to version control.
 
-### Managing Secrets
-
-We use `.env.local` for secrets (like API keys) to prevent accidentally committing them to git.
-
-1. Edit `.env.local` and add your secrets:
-
-   ```properties
-   VITE_UNSPLASH_ACCESS_KEY=your-actual-key-here
-   ```
-
-2. Never commit `.env.local` - it's automatically git-ignored
+2. **Secrets** (Netlify site configuration): Sensitive API keys are configured in the Netlify dashboard under **Site settings → Environment variables**. Both local development (via Netlify CLI) and production deployments pull secrets from here. See [Netlify's environment variables documentation](https://docs.netlify.com/environment-variables/overview/).
 
 ### Required Secrets
 
-- `VITE_UNSPLASH_ACCESS_KEY` - Unsplash API access key
-  - Get one at: <https://unsplash.com/developers>
+The following API keys must be configured in Netlify:
+
+- `OPEN_WEATHER_ACCESS_KEY`: API key for OpenWeather API (required for serverless function)
+- `UNSPLASH_ACCESS_KEY`: API key for Unsplash API (required for serverless function)
+
+### Local Development
+
+When running `pnpm dev`, the Vite Netlify plugin automatically pulls environment variables from your linked Netlify site and merges them with `.env`.
+
+**First-time setup**: Run `netlify link` to connect your local project to a Netlify site.
 
 ## Development Setup
 
@@ -52,21 +49,26 @@ This project includes pre-configured VS Code settings and recommended extensions
 
 1. **Install Required Extensions:**
    VS Code will automatically prompt you to install the recommended extensions when you open the project. If not:
-   - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-   - [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+   - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - JavaScript/TypeScript linting
+   - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - Code formatting
+   - [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) - CSS linting
 
 2. **Editor Settings:**
    The project includes `.vscode/settings.json` with all necessary configuration for:
-   - Auto-formatting on save for TypeScript/JavaScript (ESLint)
-   - CSS formatting and linting (StyleLint)
+   - Auto-formatting on save with Prettier (all supported file types)
+   - ESLint integration for TypeScript/JavaScript
+   - StyleLint integration for CSS
    - Proper TypeScript settings
 
    No manual configuration needed - all settings are version-controlled.
 
 ### Code Style
 
-- **TypeScript/JavaScript**: ESLint enforces consistent code style
-- **CSS:**
+- **TypeScript/JavaScript/JSON/Markdown**: Prettier handles formatting with auto-formatting on save
+- **Linting**:
+  - ESLint enforces code quality rules for TypeScript/JavaScript
+  - StyleLint enforces CSS conventions
+- **CSS Property Ordering:**
   - StyleLint with recess-order for logical property grouping
   - Properties ordered by: positioning → layout → box model → visual
   - Automatic empty lines between property groups

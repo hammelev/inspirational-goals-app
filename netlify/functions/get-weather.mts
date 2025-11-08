@@ -1,11 +1,13 @@
 import { OpenWeatherCurrentWeatherSchema } from "#shared/api-types.ts";
 import { ErrorCodes } from "#shared/error-codes.ts";
+import type { Config } from "@netlify/functions";
 import { z } from "zod";
 
 import {
   OpenWeatherQueryParamsSchema,
   OpenWeatherSchema,
 } from "../types/input-types";
+import { createDefaultRateLimitConfig } from "../util/function-config-helpers";
 import {
   createResponseFromZodError,
   createResponseRequestFailed,
@@ -90,4 +92,9 @@ export default async (request: Request) => {
       error instanceof Error ? error.message : "Unknown error",
     );
   }
+};
+
+export const config: Config = {
+  path: "/api/get-weather",
+  rateLimit: createDefaultRateLimitConfig(),
 };

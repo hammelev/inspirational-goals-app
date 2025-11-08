@@ -1,3 +1,6 @@
-ignoredBuiltDependencies:
+onlyBuiltDependencies:
+  - "@parcel/watcher"
+  - protobufjs
+  - sharp
   - "@swc/core"
   - esbuild
