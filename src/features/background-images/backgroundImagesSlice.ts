@@ -1,4 +1,4 @@
-import type { UnsplashImageType } from "#shared/api-types.ts";
+import type { UnsplashImageType } from "#shared/api-types";
 import type { Action, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import {
   createAsyncThunk,

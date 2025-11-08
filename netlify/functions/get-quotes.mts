@@ -1,5 +1,6 @@
 import { QuotableQuoteSchema } from "#shared/api-types.ts";
 import { ErrorCodes } from "#shared/error-codes.ts";
+import type { Config } from "@netlify/functions";
 import https from "https";
 import { z } from "zod";
 
@@ -7,6 +8,7 @@ import {
   QuotableQueryParamsSchema,
   QuotableSchema,
 } from "../types/input-types";
+import { createDefaultRateLimitConfig } from "../util/function-config-helpers";
 import {
   createResponseFromZodError,
   createResponseRequestFailed,
@@ -59,7 +61,7 @@ const envResult = QuotableSchema.safeParse(process.env);
 if (!envResult.success) {
   console.error(
     "Invalid environment configuration:",
-    JSON.stringify(z.treeifyError(envResult.error), null, 2),
+    JSON.stringify(z.prettifyError(envResult.error), null, 2),
   );
 }
 
@@ -115,4 +117,9 @@ export default async (request: Request) => {
       error instanceof Error ? error.message : "Unknown error",
     );
   }
+};
+
+export const config: Config = {
+  path: "/api/get-quotes",
+  rateLimit: createDefaultRateLimitConfig(),
 };

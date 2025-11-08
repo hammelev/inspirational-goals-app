@@ -1,4 +1,4 @@
-import type { OpenWeatherCurrentWeatherType } from "#shared/api-types.ts";
+import type { OpenWeatherCurrentWeatherType } from "#shared/api-types";
 
 export type WeatherSliceStateType = {
   currentWeather: OpenWeatherCurrentWeatherType | null;
