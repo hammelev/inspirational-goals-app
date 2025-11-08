@@ -1,4 +1,4 @@
-import type { QuoteableQuoteType } from "#shared/api-types";
+import type { QuotableQuoteType } from "#shared/api-types";
 import type { Action, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import {
   createAsyncThunk,
@@ -9,10 +9,10 @@ import {
 import { ZodError } from "zod";
 
 import type { InspirationalQuotesSliceStateType } from "./inspirational-quotes.types";
-import { fetchRandomInspirationalQuotes } from "./quoteable.service";
+import { fetchRandomInspirationalQuotes } from "./quotes.service";
 
 export const fetchInspirationalQuotes = createAsyncThunk<
-  QuoteableQuoteType[],
+  QuotableQuoteType[],
   undefined,
   { rejectValue: string }
 >("inspirationalQuotes/fetch", async (_, { rejectWithValue }) => {
@@ -71,7 +71,7 @@ const inspirationalQuotesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchInspirationalQuotes.fulfilled,
-      (state, action: { payload: QuoteableQuoteType[] }) => {
+      (state, action: { payload: QuotableQuoteType[] }) => {
         state.quotes = action.payload;
         state.currentQuoteIndex = 0;
         state.isLoading = false;
@@ -97,7 +97,7 @@ const inspirationalQuotesSlice = createSlice({
 
 export const selectCurrentQuote = (state: {
   inspirationalQuotes: InspirationalQuotesSliceStateType;
-}): QuoteableQuoteType | undefined =>
+}): QuotableQuoteType | undefined =>
   state.inspirationalQuotes.quotes[state.inspirationalQuotes.currentQuoteIndex];
 
 export const { setCurrentQuoteIndex } = inspirationalQuotesSlice.actions;
