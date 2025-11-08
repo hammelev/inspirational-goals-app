@@ -1,11 +1,11 @@
-import { QuoteableQuoteSchema } from "#shared/api-types.ts";
+import { QuotableQuoteSchema } from "#shared/api-types.ts";
 import { ErrorCodes } from "#shared/error-codes.ts";
 import https from "https";
 import { z } from "zod";
 
 import {
-  QuoteableQueryParamsSchema,
-  QuoteableSchema,
+  QuotableQueryParamsSchema,
+  QuotableSchema,
 } from "../types/input-types";
 import {
   createResponseFromZodError,
@@ -14,7 +14,7 @@ import {
 
 /**
  * Makes an HTTPS request ignoring certificate validation
- * Only used for Quoteable API due to their SSL certificate issues
+ * Only used for Quotable API due to their SSL certificate issues
  * See: https://github.com/lukePeavey/quotable/issues/266
  */
 function fetchInsecure(url: URL): Promise<Response> {
@@ -54,7 +54,7 @@ function fetchInsecure(url: URL): Promise<Response> {
   });
 }
 
-const envResult = QuoteableSchema.safeParse(process.env);
+const envResult = QuotableSchema.safeParse(process.env);
 
 if (!envResult.success) {
   console.error(
@@ -72,20 +72,20 @@ export default async (request: Request) => {
     );
   }
 
-  const { QUOTEABLE_BASE_URL, QUOTEABLE_ENDPOINT_GET_RANDOM_QUOTES } =
+  const { QUOTABLE_BASE_URL, QUOTABLE_ENDPOINT_GET_RANDOM_QUOTES } =
     envResult.data;
 
   const newRequestUrl = new URL(
-    QUOTEABLE_ENDPOINT_GET_RANDOM_QUOTES,
-    QUOTEABLE_BASE_URL,
+    QUOTABLE_ENDPOINT_GET_RANDOM_QUOTES,
+    QUOTABLE_BASE_URL,
   );
 
   // Parse and validate query parameters
   const url = new URL(request.url);
   const queryParams = Object.fromEntries(url.searchParams.entries());
-  const paramsResult = QuoteableQueryParamsSchema.safeParse(queryParams);
+  const paramsResult = QuotableQueryParamsSchema.safeParse(queryParams);
 
-  // Illegal limit value => fallback to default behaviour of the Quoteable API when it is not provided.
+  // Illegal limit value => fallback to default behaviour of the Quotable API when it is not provided.
   if (paramsResult.success && paramsResult.data.limit) {
     newRequestUrl.searchParams.set("limit", paramsResult.data.limit.toString());
   }
@@ -94,10 +94,10 @@ export default async (request: Request) => {
     const response = await fetchInsecure(newRequestUrl);
 
     if (!response.ok) {
-      throw new Error(`Quoteable API returned ${response.status}`);
+      throw new Error(`Quotable API returned ${response.status}`);
     }
 
-    const data = z.array(QuoteableQuoteSchema).parse(await response.json());
+    const data = z.array(QuotableQuoteSchema).parse(await response.json());
 
     return new Response(JSON.stringify(data), {
       status: 200,

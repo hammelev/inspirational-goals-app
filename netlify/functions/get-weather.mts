@@ -69,7 +69,7 @@ export default async (request: Request) => {
       ...data,
       weather: data.weather.map((weather) => ({
         ...weather,
-        // Construct full icon URL: base + icon code + extension
+        // Transform icon code (e.g., '10d') to full URL: base + icon code + extension
         icon: `${OPEN_WEATHER_BASE_URL_ICONS}/${weather.icon}.png`,
       })),
     };

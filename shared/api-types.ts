@@ -23,7 +23,7 @@ export type OpenWeatherCurrentWeatherType = z.infer<
 >;
 
 // Quotable API
-export const QuoteableQuoteSchema = z.object({
+export const QuotableQuoteSchema = z.object({
   _id: z.string(),
   content: z.string(),
   author: z.string(),
@@ -32,7 +32,7 @@ export const QuoteableQuoteSchema = z.object({
   tags: z.array(z.string()),
 });
 
-export type QuoteableQuoteType = z.infer<typeof QuoteableQuoteSchema>;
+export type QuotableQuoteType = z.infer<typeof QuotableQuoteSchema>;
 
 // Unsplash API
 export const UnsplashImageSchema = z.object({

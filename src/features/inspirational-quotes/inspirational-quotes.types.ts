@@ -1,7 +1,7 @@
-import { type QuoteableQuoteType } from "#shared/api-types";
+import { type QuotableQuoteType } from "#shared/api-types";
 
 export interface InspirationalQuotesSliceStateType {
-  quotes: QuoteableQuoteType[];
+  quotes: QuotableQuoteType[];
   currentQuoteIndex: number;
   isLoading: boolean;
   hasError: boolean;
