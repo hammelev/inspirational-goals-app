@@ -13,7 +13,7 @@ export const createResponseFromZodError = (
       },
     }),
     {
-      status: 500,
+      status: errorCode === ErrorCodes.INVALID_REQUEST_PARAMS ? 400 : 500,
       headers: {
         "Content-Type": "application/json",
       },

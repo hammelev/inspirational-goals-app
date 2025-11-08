@@ -1,11 +1,13 @@
 import { UnsplashImageSchema } from "#shared/api-types.ts";
 import { ErrorCodes } from "#shared/error-codes.ts";
+import type { Config } from "@netlify/functions";
 import { z } from "zod";
 
 import {
   UnsplashQueryParamsSchema,
   UnsplashSchema,
 } from "../types/input-types";
+import { createDefaultRateLimitConfig } from "../util/function-config-helpers";
 import {
   createResponseFromZodError,
   createResponseRequestFailed,
@@ -16,7 +18,7 @@ const envResult = UnsplashSchema.safeParse(process.env);
 if (!envResult.success) {
   console.error(
     "Invalid environment configuration:",
-    JSON.stringify(z.treeifyError(envResult.error), null, 2),
+    JSON.stringify(z.prettifyError(envResult.error), null, 2),
   );
 }
 
@@ -58,7 +60,13 @@ export default async (request: Request) => {
       throw new Error(`Unsplash API returned ${response.status}`);
     }
 
-    const data = z.array(UnsplashImageSchema).parse(await response.json());
+    // When count is equal to 1, Unsplash returns a single image not in an array.
+    // Therefore, the union parse is needed before it is ensured that an array is returned to the client.
+    const parsedData = z
+      .union([UnsplashImageSchema, z.array(UnsplashImageSchema)])
+      .parse(await response.json());
+
+    const data = parsedData instanceof Array ? parsedData : [parsedData];
 
     return new Response(JSON.stringify(data), {
       status: 200,
@@ -77,4 +85,9 @@ export default async (request: Request) => {
       error instanceof Error ? error.message : "Unknown error",
     );
   }
+};
+
+export const config: Config = {
+  path: "/api/get-images",
+  rateLimit: createDefaultRateLimitConfig(),
 };
