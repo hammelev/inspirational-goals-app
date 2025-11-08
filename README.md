@@ -37,9 +37,7 @@ The following API keys must be configured in Netlify:
 
 ### Local Development
 
-When running `pnpm dev`, the Vite Netlify plugin automatically pulls environment variables from your linked Netlify site and merges them with `.env`.
-
-**First-time setup**: Run `netlify link` to connect your local project to a Netlify site.
+When running `pnpm dev`, the Vite Netlify plugin automatically pulls environment variables from your linked Netlify site and merges them with `.env`. For this to work you must run `netlify link` to connect your local project to the Netlify site containing your environment variables.
 
 ## Development Setup
 
