@@ -54,12 +54,12 @@ export default function Weather() {
         currentWeather && (
           <>
             <img
-              src={currentWeather?.weather[0].icon}
-              alt={currentWeather?.weather[0].description ?? "Weather icon"}
+              src={currentWeather.weather[0].icon}
+              alt={currentWeather.weather[0].description ?? "Weather icon"}
             />
             <div className={styles["weather-info-container"]}>
-              <span>{`${currentWeather?.main.temp}°C, ${currentWeather?.weather[0].main}`}</span>
-              <span>{currentWeather?.name}</span>
+              <span>{`${currentWeather.main.temp}°C, ${currentWeather.weather[0].main}`}</span>
+              <span>{currentWeather.name}</span>
             </div>
           </>
         )

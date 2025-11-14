@@ -9,14 +9,20 @@ export default function LoadingIndicator({
   size,
   isContainerLoader = false,
 }: LoadingIndicatorProps) {
-  const sizeClass = size ? styles[size] : "";
-  const containerLoaderClass = isContainerLoader
-    ? styles["container-loader"]
-    : "";
+  const overlayClasses = [
+    styles["loading-overlay"],
+    isContainerLoader && styles["container-loader"],
+  ]
+    .filter(Boolean)
+    .join("");
+
+  const indicatorClasses = [styles["loading-indicator"], size && styles[size]]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <div className={`${styles["loading-overlay"]} ${containerLoaderClass}`}>
-      <div className={`${styles["loading-indicator"]} ${sizeClass}`} />
+    <div className={overlayClasses} aria-label="Loading content" role="status">
+      <div className={indicatorClasses} aria-hidden="true" />
     </div>
   );
 }

@@ -55,7 +55,7 @@ export const getNewQuote =
 const initialState: InspirationalQuotesSliceStateType = {
   quotes: [],
   currentQuoteIndex: 0,
-  isLoading: false,
+  isLoading: true,
   hasError: false,
   errorMessage: null,
 };
