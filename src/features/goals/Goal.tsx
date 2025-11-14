@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
 import { useAppDispatch } from "../../app/hooks";
-import Button from "../../components/Button";
+import Button from "../../components/button/Button";
 import { deleteGoal, toggleGoalCompletion } from "./GoalsSlice";
 import styles from "./goals.module.css";
 import type { GoalType } from "./goals.types";

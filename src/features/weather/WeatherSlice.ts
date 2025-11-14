@@ -38,7 +38,7 @@ export const getCurrentWeather = createAsyncThunk<
 
 const initialState: WeatherSliceStateType = {
   currentWeather: null,
-  isLoading: false,
+  isLoading: true,
   hasError: false,
   errorMessage: null,
 };
@@ -51,6 +51,9 @@ const weatherSlice = createSlice({
     builder.addCase(
       getCurrentWeather.fulfilled,
       (state, action: PayloadAction<OpenWeatherCurrentWeatherType>) => {
+        state.isLoading = false;
+        state.hasError = false;
+        state.errorMessage = null;
         state.currentWeather = action.payload;
       },
     );
@@ -73,5 +76,9 @@ const weatherSlice = createSlice({
 export const selectCurrentWeather = (state: {
   weather: WeatherSliceStateType;
 }): OpenWeatherCurrentWeatherType | null => state.weather.currentWeather;
+
+export const selectIsLoading = (state: {
+  weather: WeatherSliceStateType;
+}): boolean => state.weather.isLoading;
 
 export default weatherSlice.reducer;

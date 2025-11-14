@@ -1,4 +1,6 @@
 .primary-container {
+  position: relative;
+
   background-color: var(--container-color-primary);
   border: var(--border-default);
   border-radius: 25px;

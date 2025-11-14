@@ -55,7 +55,7 @@ export const getNewQuote =
 const initialState: InspirationalQuotesSliceStateType = {
   quotes: [],
   currentQuoteIndex: 0,
-  isLoading: false,
+  isLoading: true,
   hasError: false,
   errorMessage: null,
 };
@@ -99,6 +99,10 @@ export const selectCurrentQuote = (state: {
   inspirationalQuotes: InspirationalQuotesSliceStateType;
 }): QuotableQuoteType | undefined =>
   state.inspirationalQuotes.quotes[state.inspirationalQuotes.currentQuoteIndex];
+
+export const selectIsLoading = (state: {
+  inspirationalQuotes: InspirationalQuotesSliceStateType;
+}): boolean => state.inspirationalQuotes.isLoading;
 
 export const { setCurrentQuoteIndex } = inspirationalQuotesSlice.actions;
 
