@@ -87,7 +87,7 @@ export const navigateBackward =
 const initialState: BackgroundImagesSliceStateType = {
   images: [],
   currentDisplayImageIndex: 0,
-  isLoading: false,
+  isLoading: true,
   hasError: false,
   errorMessage: null,
 };

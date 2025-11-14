@@ -5,9 +5,14 @@
   align-self: flex-end;
   justify-content: flex-start;
 
-  width: fit-content;
+  width: 10vw;
+  min-width: 100px;
+  height: 10vh;
+  min-height: 50px;
 
   padding: 0.25rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
 
   font-size: 0.75rem;
 

@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../app/hooks";
-import PrimaryContainer from "../../components/PrimaryContainer";
+import PrimaryContainer from "../../components/primary-container/PrimaryContainer";
 import Goal from "./Goal";
 import { selectGoals } from "./GoalsSlice";
 import styles from "./goals.module.css";

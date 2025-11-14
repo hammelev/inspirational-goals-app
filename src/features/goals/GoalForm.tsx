@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { useAppDispatch } from "../../app/hooks";
-import Button from "../../components/Button";
-import PrimaryContainer from "../../components/PrimaryContainer";
+import Button from "../../components/button/Button";
+import PrimaryContainer from "../../components/primary-container/PrimaryContainer";
 import { addGoal } from "./GoalsSlice";
 import styles from "./goals.module.css";
 
