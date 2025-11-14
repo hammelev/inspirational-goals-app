@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   /* CSS Custom Properties - alphabetically ordered */
   --border-default: 1px solid rgb(255 255 255 / 20%);
@@ -23,19 +27,26 @@
 
   /* Other root styles */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-}
 
-#root {
-  width: 99vw;
-  height: 99vh;
+  /* Loading specific styling */
+  --loading-indicator-color-primary: var(--button-color-primary);
+  --loading-indicator-color-secondary: rgb(132 169 140 / 30%);
 }
 
 body {
+  padding: 0;
   margin: 0;
+
+  overflow: auto;
 
   color: var(--text-color-default);
 
   text-align: center;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
 }
 
 h1 {

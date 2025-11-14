@@ -100,6 +100,10 @@ export const selectCurrentQuote = (state: {
 }): QuotableQuoteType | undefined =>
   state.inspirationalQuotes.quotes[state.inspirationalQuotes.currentQuoteIndex];
 
+export const selectIsLoading = (state: {
+  inspirationalQuotes: InspirationalQuotesSliceStateType;
+}): boolean => state.inspirationalQuotes.isLoading;
+
 export const { setCurrentQuoteIndex } = inspirationalQuotesSlice.actions;
 
 export default inspirationalQuotesSlice.reducer;

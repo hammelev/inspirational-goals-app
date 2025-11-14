@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import Button from "../../components/Button";
-import PrimaryContainer from "../../components/PrimaryContainer";
+import Button from "../../components/button/Button";
+import LoadingIndicator from "../../components/loading-indicator/LoadingIndicator";
+import PrimaryContainer from "../../components/primary-container/PrimaryContainer";
+import { useLoadingState } from "../../hooks/useLoadingState";
 import styles from "./inspirational-quotes.module.css";
 import { getNewQuote, selectCurrentQuote } from "./inspirationalQuotesSlice";
 
 export default function InspirationalQuotes() {
   const dispatch = useAppDispatch();
   const quote = useAppSelector(selectCurrentQuote);
+  const { showQuotesLoader } = useLoadingState();
 
   useEffect(() => {
     dispatch(getNewQuote());
@@ -20,6 +23,9 @@ export default function InspirationalQuotes() {
 
   return (
     <PrimaryContainer className={styles.quote}>
+      {showQuotesLoader && (
+        <LoadingIndicator size="small" isContainerLoader={true} />
+      )}
       <span>{quote?.content}</span>
       <div className={styles["quote-author-and-button-container"]}>
         <span className={styles["quote-author"]}>- {quote?.author}</span>
