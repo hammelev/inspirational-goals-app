@@ -11,7 +11,7 @@
   width: min(95vw, 800px);
   height: 15vh;
 
-  padding: 0 var(--space-s);
+  padding: var(--space-3xs) var(--space-s);
   margin: 0 auto;
 }
 

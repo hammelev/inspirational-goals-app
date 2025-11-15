@@ -36,10 +36,25 @@ export type QuotableQuoteType = z.infer<typeof QuotableQuoteSchema>;
 
 // Unsplash API
 export const UnsplashImageSchema = z.object({
-  urls: z.object({
-    regular: z.string(),
-  }),
   alt_description: z.string(),
+  user: z.object({
+    links: z.object({
+      html: z.url(),
+    }),
+    name: z.string(),
+  }),
+  urls: z.object({
+    regular: z.url(),
+  }),
 });
 
 export type UnsplashImageType = z.infer<typeof UnsplashImageSchema>;
+
+export const ImageSchema = UnsplashImageSchema.extend({
+  provider: z.object({
+    name: z.string(),
+    link: z.url(),
+  }),
+});
+
+export type ImageType = z.infer<typeof ImageSchema>;

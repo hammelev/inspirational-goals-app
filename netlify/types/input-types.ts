@@ -37,7 +37,9 @@ export const UnsplashQueryParamsSchema = z.object({
 export type UnsplashQueryParams = z.infer<typeof UnsplashQueryParamsSchema>;
 
 export const UnsplashSchema = z.object({
+  UNSPLASH_ACCESS_KEY: z.string().min(1),
+  UNSPLASH_APP_NAME: z.string().min(1),
   UNSPLASH_BASE_URL: z.url(),
   UNSPLASH_ENDPOINT_GET_RANDOM_IMAGES: z.string(),
-  UNSPLASH_ACCESS_KEY: z.string().min(1),
+  UNSPLASH_WEBSITE_URL: z.url(),
 });

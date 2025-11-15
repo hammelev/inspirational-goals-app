@@ -1,4 +1,4 @@
-import type { UnsplashImageType } from "#shared/api-types";
+import type { ImageType } from "#shared/api-types";
 import type { Action, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import {
   createAsyncThunk,
@@ -17,7 +17,7 @@ import { fetchRandomImages } from "./images.service";
 
 export const fetchRandomBackgroundImages = createAsyncThunk<
   {
-    newImages: UnsplashImageType[];
+    newImages: ImageType[];
     fetchReason: BackGroundImageFetchReasonsType;
   },
   { fetchReason: BackGroundImageFetchReasonsType },
@@ -143,7 +143,7 @@ const backgroundImagesSlice = createSlice({
 
 export const selectCurrentBackgroundImage = (state: {
   backgroundImages: BackgroundImagesSliceStateType;
-}): UnsplashImageType | undefined =>
+}): ImageType | undefined =>
   state.backgroundImages.images[
     state.backgroundImages.currentDisplayImageIndex
   ];

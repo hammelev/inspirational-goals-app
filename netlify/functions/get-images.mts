@@ -1,4 +1,8 @@
-import { UnsplashImageSchema } from "#shared/api-types.ts";
+import {
+  type ImageType,
+  UnsplashImageSchema,
+  type UnsplashImageType,
+} from "#shared/api-types.ts";
 import { ErrorCodes } from "#shared/error-codes.ts";
 import type { Config } from "@netlify/functions";
 import { z } from "zod";
@@ -32,8 +36,10 @@ export default async (request: Request) => {
 
   const {
     UNSPLASH_ACCESS_KEY,
+    UNSPLASH_APP_NAME,
     UNSPLASH_BASE_URL,
     UNSPLASH_ENDPOINT_GET_RANDOM_IMAGES,
+    UNSPLASH_WEBSITE_URL,
   } = envResult.data;
 
   const newRequestUrl = new URL(
@@ -66,9 +72,24 @@ export default async (request: Request) => {
       .union([UnsplashImageSchema, z.array(UnsplashImageSchema)])
       .parse(await response.json());
 
-    const data = parsedData instanceof Array ? parsedData : [parsedData];
+    const data: UnsplashImageType[] =
+      parsedData instanceof Array ? parsedData : [parsedData];
 
-    return new Response(JSON.stringify(data), {
+    const dataEnriched: ImageType[] = data.map((image) => ({
+      ...image,
+      provider: {
+        name: "Unsplash",
+        link: UNSPLASH_WEBSITE_URL,
+      },
+      user: {
+        ...image.user,
+        links: {
+          html: `${image.user.links.html}?utm_source=${encodeURIComponent(UNSPLASH_APP_NAME)}&utm_medium=referral`,
+        },
+      },
+    }));
+
+    return new Response(JSON.stringify(dataEnriched), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
