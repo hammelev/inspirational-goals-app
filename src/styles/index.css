@@ -7,7 +7,7 @@
 :root {
   --button-text-color-destructive: white;
 
-  /* Button specific varaibles */
+  /* Button specific variables */
   --button-border-primary: 1px solid rgb(0 0 0 / 20%);
   --button-color-destructive: #e57373; /* Soft Red */
   --button-color-primary: #84a98c;
@@ -16,7 +16,7 @@
   --button-text-color-primary: white;
   --button-text-color-secondary: black;
 
-  /* Cotaniner specific vars */
+  /* Container specific vars */
   --container-color-primary: rgb(245 243 244 / 50%);
 
   /* Font sizes */

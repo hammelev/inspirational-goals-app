@@ -36,7 +36,7 @@ export type QuotableQuoteType = z.infer<typeof QuotableQuoteSchema>;
 
 // Unsplash API
 export const UnsplashImageSchema = z.object({
-  alt_description: z.string(),
+  alt_description: z.string().nullable().optional(),
   user: z.object({
     links: z.object({
       html: z.url(),
