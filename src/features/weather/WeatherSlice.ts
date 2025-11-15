@@ -38,7 +38,7 @@ export const getCurrentWeather = createAsyncThunk<
 
 const initialState: WeatherSliceStateType = {
   currentWeather: null,
-  isLoading: true,
+  isLoading: false,
   hasError: false,
   errorMessage: null,
 };

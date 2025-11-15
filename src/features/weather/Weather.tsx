@@ -12,7 +12,12 @@ import styles from "./weather.module.css";
 
 export default function Weather() {
   const dispatch = useAppDispatch();
-  const { coordinates, errorCode, retry } = useGeoLocation();
+  const {
+    coordinates,
+    errorCode,
+    loading: geoLocationLoading,
+    retry,
+  } = useGeoLocation();
   const currentWeather = useAppSelector(selectCurrentWeather);
   const { showWeatherLoader } = useLoadingState();
 
@@ -32,7 +37,7 @@ export default function Weather() {
 
   return (
     <PrimaryContainer className={styles["weather-container"]}>
-      {showWeatherLoader && (
+      {showWeatherLoader && geoLocationLoading && (
         <LoadingIndicator size="small" isContainerLoader={true} />
       )}
       {errorCode ? (
