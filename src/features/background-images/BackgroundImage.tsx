@@ -56,7 +56,7 @@ export default function BackgroundImage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {image.user?.name}{" "}
+            {image.user.name}{" "}
           </a>
           <br /> on{" "}
           <a

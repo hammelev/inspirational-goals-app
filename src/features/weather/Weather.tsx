@@ -37,7 +37,7 @@ export default function Weather() {
 
   return (
     <PrimaryContainer className={styles["weather-container"]}>
-      {showWeatherLoader && geoLocationLoading && (
+      {(showWeatherLoader || geoLocationLoading) && (
         <LoadingIndicator size="small" isContainerLoader={true} />
       )}
       {errorCode ? (
