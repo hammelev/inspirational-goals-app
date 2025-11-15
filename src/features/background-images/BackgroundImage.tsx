@@ -44,7 +44,7 @@ export default function BackgroundImage() {
         <img
           className={styles["background-image"]}
           src={image.urls.regular}
-          alt={image.alt_description}
+          alt={image.alt_description ?? ""}
         />
         <PrimaryContainer
           className={styles["background-image-credit"]}
@@ -56,7 +56,7 @@ export default function BackgroundImage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {image.user?.name}{" "}
+            {image.user.name}{" "}
           </a>
           <br /> on{" "}
           <a
