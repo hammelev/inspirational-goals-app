@@ -26,7 +26,7 @@ export default function InspirationalQuotes() {
       {showQuotesLoader && (
         <LoadingIndicator size="small" isContainerLoader={true} />
       )}
-      <span>{quote?.content}</span>
+      <span className={styles["quote-text"]}>{quote?.content}</span>
       <div className={styles["quote-author-and-button-container"]}>
         <span className={styles["quote-author"]}>- {quote?.author}</span>
         <Button

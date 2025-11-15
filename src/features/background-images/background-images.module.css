@@ -12,6 +12,9 @@
 }
 
 .background-navigation-button {
+  --flip-x: 1; /* Default: no flip */
+  --scale: 1; /* Default: no scale */
+
   position: fixed;
   top: 50%;
   z-index: 10;
@@ -19,7 +22,7 @@
   padding: 0;
   margin: 0;
 
-  font-size: 2rem;
+  font-size: var(--font-size-4);
 
   color: rgb(255 255 255 / 60%);
 
@@ -28,7 +31,7 @@
   background: transparent;
   border: none;
 
-  transform: translateY(-50%);
+  transform: translateY(-50%) scaleX(var(--flip-x)) scale(var(--scale));
 
   transition:
     color 0.3s ease,
@@ -37,17 +40,19 @@
 }
 
 .background-navigation-button:hover {
+  --scale: 1.1;
+
   color: white;
 
   filter: drop-shadow(0 0 12px rgb(255 255 255 / 80%));
-
-  transform: translateY(-50%) scale(1.1);
 }
 
 .background-navigation-button-back {
-  left: 1rem;
+  left: var(--space-2xs);
 }
 
 .background-navigation-button-forward {
-  right: 1rem;
+  --flip-x: -1; /* Flip this button */
+
+  right: var(--space-2xs);
 }
