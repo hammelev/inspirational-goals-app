@@ -1,4 +1,4 @@
-import type { UnsplashImageType } from "#shared/api-types";
+import type { ImageType } from "#shared/api-types";
 
 export const BACKGROUND_IMAGE_FETCH_REASONS = {
   INIT: "INIT",
@@ -10,7 +10,7 @@ export type BackGroundImageFetchReasonsType =
   (typeof BACKGROUND_IMAGE_FETCH_REASONS)[keyof typeof BACKGROUND_IMAGE_FETCH_REASONS];
 
 export interface BackgroundImagesSliceStateType {
-  images: UnsplashImageType[];
+  images: ImageType[];
   currentDisplayImageIndex: number;
   isLoading: boolean;
   hasError: boolean;
