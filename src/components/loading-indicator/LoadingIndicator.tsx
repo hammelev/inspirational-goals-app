@@ -14,7 +14,7 @@ export default function LoadingIndicator({
     isContainerLoader && styles["container-loader"],
   ]
     .filter(Boolean)
-    .join("");
+    .join(" ");
 
   const indicatorClasses = [styles["loading-indicator"], size && styles[size]]
     .filter(Boolean)

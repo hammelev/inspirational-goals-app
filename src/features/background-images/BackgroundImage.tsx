@@ -62,7 +62,7 @@ export default function BackgroundImage() {
         }}
         disabled={isLoading}
       >
-        arrow_forward_ios
+        arrow_back_ios
       </button>
     </>
   );

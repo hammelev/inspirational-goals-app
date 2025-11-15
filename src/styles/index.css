@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -31,6 +33,27 @@
   /* Loading specific styling */
   --loading-indicator-color-primary: var(--button-color-primary);
   --loading-indicator-color-secondary: rgb(132 169 140 / 30%);
+
+  /* Font sizes */
+  --font-size-0: clamp(0.6076rem, 0.5955rem + 0.0519vw, 0.72rem);
+  --font-size-1: clamp(0.7292rem, 0.7107rem + 0.0789vw, 0.9rem);
+  --font-size-2: clamp(0.875rem, 0.8479rem + 0.1154vw, 1.125rem);
+  --font-size-3: clamp(1.05rem, 1.0114rem + 0.1645vw, 1.4063rem);
+  --font-size-4: clamp(1.26rem, 1.2061rem + 0.2299vw, 1.7578rem);
+  --font-size-5: clamp(1.512rem, 1.4378rem + 0.3164vw, 2.1973rem);
+  --font-size-6: clamp(1.8144rem, 1.7135rem + 0.4304vw, 2.7466rem);
+  --font-size-7: clamp(2.1773rem, 2.0414rem + 0.5799vw, 3.4332rem);
+
+  /* Spacing variables */
+  --space-3xs: clamp(0.25rem, 0.2432rem + 0.0289vw, 0.3125rem);
+  --space-2xs: clamp(0.4375rem, 0.424rem + 0.0577vw, 0.5625rem);
+  --space-xs: clamp(0.6875rem, 0.6672rem + 0.0866vw, 0.875rem);
+  --space-s: clamp(0.875rem, 0.8479rem + 0.1154vw, 1.125rem);
+  --space-m: clamp(1.3125rem, 1.2719rem + 0.1732vw, 1.6875rem);
+  --space-l: clamp(1.75rem, 1.6959rem + 0.2309vw, 2.25rem);
+  --space-xl: clamp(2.625rem, 2.5438rem + 0.3463vw, 3.375rem);
+  --space-2xl: clamp(3.5rem, 3.3918rem + 0.4618vw, 4.5rem);
+  --space-3xl: clamp(5.25rem, 5.0877rem + 0.6926vw, 6.75rem);
 }
 
 body {
@@ -38,6 +61,8 @@ body {
   margin: 0;
 
   overflow: hidden;
+
+  font-size: var(--font-size-2);
 
   color: var(--text-color-default);
 
@@ -50,7 +75,7 @@ body {
 }
 
 h1 {
-  font-size: 1.5rem;
+  font-size: var(--font-size-3);
   font-weight: bold;
 }
 
@@ -63,4 +88,15 @@ h6 {
   margin: 0;
 
   line-height: 1.5;
+}
+
+@media (width >= 600px) and (width <= 1600px) {
+  h1 {
+    /* Use a smaller variable in this range */
+    font-size: var(--font-size-2);
+  }
+
+  body {
+    font-size: var(--font-size-1);
+  }
 }
