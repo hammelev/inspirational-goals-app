@@ -1,4 +1,27 @@
-# Inspirational website made with React + TypeScript + Vite
+# Inspirational Goals - Daily Motivation & Goal Tracker
+
+> Responsive web application allowing users to set goals, which can then later be marked as complete. The app features dynamic backgrounds with images from [Unsplash](https://unsplash.com/), inspirational quotes from [Quotable API](https://github.com/lukePeavey/quotable), and weather information from [OpenWeather API](https://openweathermap.org/).
+
+**[🚀 Live Demo](https://hammelev-inspirational-goals.netlify.app/)**
+
+A demo of the website can be seen here: **[Try the app here!](https://hammelev-inspirational-goals.netlify.app/)**
+
+## Table of Contents
+
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Environment Setup](#environment-setup)
+- [Tech Stack](#tech-stack)
+- [License](#license)
+
+## Features
+
+- **Dynamic Backgrounds**: Images from Unsplash API with proper attribution
+- **Daily Inspiration**: Motivational quotes via Quotable API integration
+- **Goal Management**: CRUD operations with Redux state management and local persistence
+- **Weather Integration**: Real-time weather data using geolocation and OpenWeather API
+- **Responsive Design**: CSS Grid/Flexbox with mobile-first approach and custom properties
+- **Performance**: Serverless functions and lazy loading
 
 ## Quick Start
 
@@ -10,11 +33,7 @@
 
 2. Set up environment variables:
    See [Environment Setup](#environment-setup) for details.
-
-3. Configure your editor:
-   See [Development Setup](#development-setup) for VS Code configuration.
-
-4. Start the development server:
+3. Start the development server:
 
    ```bash
    pnpm dev
@@ -22,68 +41,36 @@
 
 ## Environment Setup
 
-This project uses a two-tier configuration approach:
+### Required API Keys
 
-1. **Base configuration** (`.env`): Contains non-sensitive default values and public configuration. Committed to version control.
+Configure in Netlify dashboard (**Site settings → Environment variables**):
 
-2. **Secrets** (Netlify site configuration): Sensitive API keys are configured in the Netlify dashboard under **Site settings → Environment variables**. Both local development (via Netlify CLI) and production deployments pull secrets from here. See [Netlify's environment variables documentation](https://docs.netlify.com/environment-variables/overview/).
-
-### Required Secrets
-
-The following API keys must be configured in Netlify:
-
-- `OPEN_WEATHER_ACCESS_KEY`: API key for OpenWeather API (required for serverless function)
-- `UNSPLASH_ACCESS_KEY`: API key for Unsplash API (required for serverless function)
+- `OPEN_WEATHER_ACCESS_KEY`: [OpenWeather API](https://openweathermap.org/api)
+- `UNSPLASH_ACCESS_KEY`: [Unsplash API](https://unsplash.com/developers)
 
 ### Local Development
 
-When running `pnpm dev`, the Vite Netlify plugin automatically pulls environment variables from your linked Netlify site and merges them with `.env`. For this to work you must run `netlify link` to connect your local project to the Netlify site containing your environment variables.
-
-## Development Setup
-
-### Editor Configuration (VS Code)
-
-This project includes pre-configured VS Code settings and recommended extensions for consistent development experience across the team.
-
-1. **Install Required Extensions:**
-   VS Code will automatically prompt you to install the recommended extensions when you open the project. If not:
-   - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - JavaScript/TypeScript linting
-   - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - Code formatting
-   - [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) - CSS linting
-
-2. **Editor Settings:**
-   The project includes `.vscode/settings.json` with all necessary configuration for:
-   - Auto-formatting on save with Prettier (all supported file types)
-   - ESLint integration for TypeScript/JavaScript
-   - StyleLint integration for CSS
-   - Proper TypeScript settings
-
-   No manual configuration needed - all settings are version-controlled.
-
-### Code Style
-
-- **TypeScript/JavaScript/JSON/Markdown**: Prettier handles formatting with auto-formatting on save
-- **Linting**:
-  - ESLint enforces code quality rules for TypeScript/JavaScript
-  - StyleLint enforces CSS conventions
-- **CSS Property Ordering:**
-  - StyleLint with recess-order for logical property grouping
-  - Properties ordered by: positioning → layout → box model → visual
-  - Automatic empty lines between property groups
-  - CSS custom properties (variables) are alphabetically ordered
-
-### Code Quality Commands
-
 ```bash
-# Check all TypeScript/JavaScript files
-pnpm lint:js
+# Link to Netlify site for environment variables
+netlify link
 
-# Check all CSS files
-pnpm lint:css
-
-# Fix CSS formatting
-pnpm lint:css:fix
-
-# Run all linting checks
-pnpm lint
+# Start development server
+pnpm dev
 ```
+
+_The project uses Netlify's environment variable system for both local development and production deployment._
+
+## Tech Stack
+
+- **Frontend**: React 19, TypeScript, Vite
+- **State Management**: Redux Toolkit
+- **Styling**: CSS Modules with CSS Custom Properties
+- **Validation**: Zod for runtime type safety and API response validation
+- **Backend**: Netlify Serverless Functions
+- **Deployment**: Netlify
+- **Code Quality**: ESLint, Prettier, Stylelint
+- **APIs**: Unsplash (images), Quotable (quotes), OpenWeather (weather)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
