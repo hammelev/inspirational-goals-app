@@ -11,6 +11,12 @@
   filter: brightness(0.7);
 }
 
+.background-image-credit {
+  position: fixed;
+  bottom: var(--space-2xs);
+  left: var(--space-2xs);
+}
+
 .background-navigation-button {
   --flip-x: 1; /* Default: no flip */
   --scale: 1; /* Default: no scale */

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import PrimaryContainer from "../../components/primary-container/PrimaryContainer";
 import styles from "./background-images.module.css";
 import { BACKGROUND_IMAGE_FETCH_REASONS } from "./background-images.types";
 import {
@@ -38,32 +39,39 @@ export default function BackgroundImage() {
   }, [dispatch, image]);
 
   return (
-    <>
-      {image && (
+    image && (
+      <>
         <img
           className={styles["background-image"]}
           src={image.urls.regular}
           alt={image.alt_description}
         />
-      )}
-      <button
-        className={`material-symbols-outlined ${styles["background-navigation-button"]} ${styles["background-navigation-button-back"]}`}
-        onClick={() => {
-          handleNavigation("back");
-        }}
-        disabled={isLoading}
-      >
-        arrow_back_ios
-      </button>
-      <button
-        className={`material-symbols-outlined ${styles["background-navigation-button"]} ${styles["background-navigation-button-forward"]}`}
-        onClick={() => {
-          handleNavigation("forward");
-        }}
-        disabled={isLoading}
-      >
-        arrow_back_ios
-      </button>
-    </>
+        <PrimaryContainer
+          className={styles["background-image-credit"]}
+          aria-label="Photo attribution"
+        >
+          Photo by <a href={image.user?.links.html}>{image?.user?.name}</a>
+          <br /> on <a href={image.provider.link}>{image?.provider.name}</a>
+        </PrimaryContainer>
+        <button
+          className={`material-symbols-outlined ${styles["background-navigation-button"]} ${styles["background-navigation-button-back"]}`}
+          onClick={() => {
+            handleNavigation("back");
+          }}
+          disabled={isLoading}
+        >
+          arrow_back_ios
+        </button>
+        <button
+          className={`material-symbols-outlined ${styles["background-navigation-button"]} ${styles["background-navigation-button-forward"]}`}
+          onClick={() => {
+            handleNavigation("forward");
+          }}
+          disabled={isLoading}
+        >
+          arrow_back_ios
+        </button>
+      </>
+    )
   );
 }

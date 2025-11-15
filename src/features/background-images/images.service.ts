@@ -1,4 +1,4 @@
-import { UnsplashImageSchema, type UnsplashImageType } from "#shared/api-types";
+import { ImageSchema, type ImageType } from "#shared/api-types";
 import { z } from "zod";
 
 import { environmentVariables } from "../../env.schema";
@@ -8,7 +8,7 @@ const {
   VITE_IMAGES_NUMBER_OF_RANDOM_IMAGES,
 } = environmentVariables;
 
-export const fetchRandomImages = async (): Promise<UnsplashImageType[]> => {
+export const fetchRandomImages = async (): Promise<ImageType[]> => {
   const searchParams = new URLSearchParams();
 
   searchParams.append("count", VITE_IMAGES_NUMBER_OF_RANDOM_IMAGES.toString());
@@ -24,7 +24,7 @@ export const fetchRandomImages = async (): Promise<UnsplashImageType[]> => {
     );
   }
 
-  const data = z.array(UnsplashImageSchema).parse(await response.json());
+  const data = z.array(ImageSchema).parse(await response.json());
 
   return data;
 };
