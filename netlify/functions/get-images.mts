@@ -84,7 +84,7 @@ export default async (request: Request) => {
       user: {
         ...image.user,
         links: {
-          html: `${image.user.links.html}?utm_source=${UNSPLASH_APP_NAME}&utm_medium=referral`,
+          html: `${image.user.links.html}?utm_source=${encodeURIComponent(UNSPLASH_APP_NAME)}&utm_medium=referral`,
         },
       },
     }));

@@ -24,6 +24,8 @@
   gap: var(--space-s);
   align-items: center;
   justify-content: center;
+
+  padding-top: var(--space-2xs);
 }
 
 .goal-form-input-text {

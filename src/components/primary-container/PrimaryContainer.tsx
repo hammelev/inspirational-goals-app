@@ -1,15 +1,16 @@
+import type { ComponentPropsWithoutRef } from "react";
+
 import styles from "./primary-container.module.css";
 
-interface PrimaryContainerProps {
-  children: React.ReactNode;
-  className?: string;
-}
+type PrimaryContainerProps = ComponentPropsWithoutRef<"div">;
+
 export default function PrimaryContainer({
   children,
   className = "",
+  ...props
 }: PrimaryContainerProps) {
   return (
-    <div className={`${styles["primary-container"]} ${className}`}>
+    <div {...props} className={`${styles["primary-container"]} ${className}`}>
       {children}
     </div>
   );

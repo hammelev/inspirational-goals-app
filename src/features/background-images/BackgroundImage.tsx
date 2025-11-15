@@ -50,8 +50,22 @@ export default function BackgroundImage() {
           className={styles["background-image-credit"]}
           aria-label="Photo attribution"
         >
-          Photo by <a href={image.user?.links.html}>{image?.user?.name}</a>
-          <br /> on <a href={image.provider.link}>{image?.provider.name}</a>
+          Photo by{" "}
+          <a
+            href={image.user.links.html}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {image.user?.name}{" "}
+          </a>
+          <br /> on{" "}
+          <a
+            href={image.provider.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {image.provider.name}
+          </a>
         </PrimaryContainer>
         <button
           className={`material-symbols-outlined ${styles["background-navigation-button"]} ${styles["background-navigation-button-back"]}`}
