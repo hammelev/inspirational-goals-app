@@ -2,8 +2,6 @@
 
 > Responsive web application allowing users to set goals, which can then later be marked as complete. The app features dynamic backgrounds with images from [Unsplash](https://unsplash.com/), inspirational quotes from [Quotable API](https://github.com/lukePeavey/quotable), and weather information from [OpenWeather API](https://openweathermap.org/).
 
-**[🚀 Live Demo](https://hammelev-inspirational-goals.netlify.app/)**
-
 A demo of the website can be seen here: **[Try the app here!](https://hammelev-inspirational-goals.netlify.app/)**
 
 ## Table of Contents
