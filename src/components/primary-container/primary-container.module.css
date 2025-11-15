@@ -1,6 +1,8 @@
 .primary-container {
   position: relative;
 
+  padding: var(--space-3xs) var(--space-m);
+
   background-color: var(--container-color-primary);
   border: var(--border-default);
   border-radius: 25px;
