@@ -86,7 +86,6 @@ export const useGeoLocation = () => {
   }, [checkAndRequestLocation]);
 
   const retry = () => {
-    setLoading(true);
     void checkAndRequestLocation(true);
   };
   return { coordinates, errorCode, loading, retry };

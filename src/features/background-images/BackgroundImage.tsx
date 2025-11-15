@@ -44,7 +44,7 @@ export default function BackgroundImage() {
         <img
           className={styles["background-image"]}
           src={image.urls.regular}
-          alt={image.alt_description ?? "Background image"}
+          alt={image.alt_description ?? ""}
         />
         <PrimaryContainer
           className={styles["background-image-credit"]}
